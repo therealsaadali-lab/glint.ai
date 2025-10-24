@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GLINT — Share App</title>
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="default">
+  <header>
+    <div class="brand">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div>
+          <div class="title">GLINT</div>
+          <div class="subtitle">Share App</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="menu-btn" id="openDrawer">≡</button>
+    </div>
+  </header>
+
+  <div class="overlay" id="drawerOverlay"></div>
+
+  <div class="drawer" id="drawer">
+    <a href="index.html" id="newChatBtn">✨ New Chat</a>
+    <div style="height: 10px;"></div>
+    <a href="save-messages.html" id="savedChatsLink">💾 Saved Conversations</a>
+    <div style="height: 10px;"></div>
+    <a href="new-project.html" id="newProjectLink">🚀 New Project</a>
+    <div style="height: 10px;"></div>
+    <a href="#" id="minihubLink">⚙️ Minihub</a>
+    <div id="minihubSubmenu" class="submenu">
+      <div class="submenu-item"><a href="theme.html" class="submenu-link">🎨 Theme</a></div>
+      <div class="submenu-item"><a href="settings.html" class="submenu-link">⚙ Settings</a></div>
+      <div class="submenu-item"><a href="privacy.html" class="submenu-link">🔒 Privacy</a></div>
+      <div class="submenu-item"><a href="voice.html" class="submenu-link">🎤 Voice</a></div>
+      <div class="submenu-item"><a href="language-selection.html" class="submenu-link">🌐 Language Selection</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="supportLink">🤝 Support</a>
+    <div id="supportSubmenu" class="submenu">
+      <div class="submenu-item"><a href="send-feedback.html" class="submenu-link">📝 Send Feedback</a></div>
+      <div class="submenu-item"><a href="share-app.html" class="submenu-link">🔗 Share this App</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="toolsLink">🛠️ Tools</a>
+    <div id="toolsSubmenu" class="submenu">
+      <div class="submenu-item"><a href="backup-restore.html" class="submenu-link">💾 Backup & Restore</a></div>
+      <div class="submenu-item"><a href="clear.html" class="submenu-link">🧹 Clear Data</a></div>
+      <div class="submenu-item"><a href="export.html" class="submenu-link">📤 Export Chat</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="infoLink">ℹ Info</a>
+    <div id="infoSubmenu" class="submenu">
+      <div class="submenu-item"><a href="about.html" class="submenu-link">ℹ About</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="chat-area" style="height: auto; min-height: calc(100vh - 140px);">
+      <div class="share-fullpage">
+        <div class="share-header">
+          <h1>🔗 Share GLINT</h1>
+          <div class="share-subtitle">Spread the word about GLINT!</div>
+        </div>
+
+        <div class="share-content">
+          <div class="description">
+            <p><strong>Help your friends and colleagues discover the power of advanced AI assistance.</strong> Share GLINT's amazing features and let others experience intelligent conversations in multiple languages.</p>
+            
+            <p>As an AI-powered assistant, I offer multilingual chat, image/video analysis, voice mode, and much more. Your sharing helps grow our AI community! 🌟</p>
+          </div>
+
+          <div class="share-options">
+            <h3>📤 Share Via</h3>
+            <div class="share-buttons">
+              <button class="share-btn whatsapp" data-platform="whatsapp">
+                <span>💬 WhatsApp</span>
+              </button>
+              <button class="share-btn telegram" data-platform="telegram">
+                <span>📱 Telegram</span>
+              </button>
+              <button class="share-btn email" data-platform="email">
+                <span>📧 Email</span>
+              </button>
+              <button class="share-btn sms" data-platform="sms">
+                <span>💬 SMS</span>
+              </button>
+              <button class="share-btn link" data-platform="link">
+                <span>🔗 Copy Link</span>
+              </button>
+              <button class="share-btn social" data-platform="social">
+                <span>📢 Social Media</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="share-message">
+            <h3>💬 Share Message Template</h3>
+            <div class="message-template">
+              <textarea id="shareMessage" readonly class="theme-input">
+🤖 Discover GLINT - Advanced AI Assistant!
+
+I've been using GLINT, an amazing AI assistant powered by AI, and thought you'd love it too!
+
+🌟 Features:
+• 💬 Multilingual Chat (Urdu, English + more)
+• 🖼️ Image & Video Analysis
+• 🎤 Voice Mode Support
+• 🔒 Privacy Focused
+• 🎨 Custom Themes
+• 💾 Message Backup
+
+GLINT understands context, processes multimedia, and provides intelligent responses. Perfect for learning, work, and daily assistance!
+
+Try it now and experience the future of AI conversations! 🚀
+
+#GLINTAI #AI #ArtificialIntelligence
+              </textarea>
+              <button class="copy-btn" id="copyMessage">
+                📋 Copy Message
+              </button>
+            </div>
+          </div>
+
+          <div class="app-info">
+            <h3>📱 About GLINT</h3>
+            <div class="info-cards">
+              <div class="info-card">
+                <div class="card-icon">🚀</div>
+                <div class="card-content">
+                  <h4>Advanced AI</h4>
+                  <p>Powered by AI's cutting-edge technology</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="card-icon">🌐</div>
+                <div class="card-content">
+                  <h4>Multilingual</h4>
+                  <p>Chat in Urdu, English & multiple languages</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="card-icon">🖼️</div>
+                <div class="card-content">
+                  <h4>Media Analysis</h4>
+                  <p>Process images, videos and documents</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="card-icon">🔒</div>
+                <div class="card-content">
+                  <h4>Privacy First</h4>
+                  <p>Your data stays secure and private</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="qr-section">
+            <h3>📲 Quick Access</h3>
+            <div class="qr-container">
+              <div class="qr-placeholder">
+                <div class="qr-icon">📱</div>
+                <p>Scan to access GLINT</p>
+                <small>(QR Code would be generated here)</small>
+              </div>
+              <div class="qr-instructions">
+                <p><strong>Quick Steps:</strong></p>
+                <ul>
+                  <li>1. Save this page to home screen</li>
+                  <li>2. Use like a native app</li>
+                  <li>3. Works offline too!</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="sharing-stats">
+            <h3>📊 Sharing Impact</h3>
+            <div class="stats">
+              <div class="stat-item">
+                <span class="stat-number" id="sharedCount">0</span>
+                <span class="stat-label">Times Shared</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" id="userReferred">0</span>
+                <span class="stat-label">Friends Referred</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="share-footer">
+            <p>© 2025 AI. All Rights Reserved. | GLINT AI Assistant</p>
+            <p class="version">Version 2.1.0 | Spread the AI revolution! 🤖</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-text">© 2025 glint.ai</div>
+    </div>
+  </footer>
+
+  <script src="theme.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <style>
+    /* Share App Page Full Screen Styling */
+    .share-fullpage {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--bg);
+      padding: 0;
+      margin: 0;
+    }
+
+    .share-header {
+      text-align: center;
+      padding: 30px 20px 20px 20px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .share-header h1 {
+      color: var(--accent);
+      font-size: 2.5em;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
+
+    .share-subtitle {
+      color: var(--text);
+      opacity: 0.7;
+      font-size: 1.1em;
+      margin: 0;
+    }
+
+    .share-content {
+      max-width: 100%;
+      padding: 0 20px 40px 20px;
+      background: var(--bg);
+    }
+
+    .description {
+      background: var(--card);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border-left: 4px solid var(--accent);
+      color: var(--text);
+    }
+
+    .description p {
+      margin: 0 0 15px 0;
+      line-height: 1.7;
+    }
+
+    .description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .share-options {
+      background: var(--card);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .share-options h3 {
+      color: var(--accent);
+      margin: 0 0 20px 0;
+      font-size: 1.3em;
+    }
+
+    .share-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+
+    .share-btn {
+      background: var(--panel);
+      color: var(--text);
+      border: 2px solid var(--border);
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .share-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.1);
+    }
+
+    .share-message {
+      background: var(--card);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .share-message h3 {
+      color: var(--accent);
+      margin: 0 0 20px 0;
+      font-size: 1.3em;
+    }
+
+    .message-template {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .theme-input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.95em;
+      resize: vertical;
+      min-height: 150px;
+      font-family: monospace;
+    }
+
+    .copy-btn {
+      background: var(--accent);
+      color: var(--bot-text);
+      border: none;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.2);
+    }
+
+    .app-info {
+      background: var(--card);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .app-info h3 {
+      color: var(--accent);
+      margin: 0 0 20px 0;
+      font-size: 1.3em;
+    }
+
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .info-card {
+      background: var(--panel);
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .card-icon {
+      font-size: 2em;
+    }
+
+    .card-content h4 {
+      color: var(--accent);
+      margin: 0 0 5px 0;
+      font-size: 1.1em;
+    }
+
+    .card-content p {
+      color: var(--text);
+      margin: 0;
+      opacity: 0.8;
+      font-size: 0.9em;
+    }
+
+    .qr-section {
+      background: var(--card);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .qr-section h3 {
+      color: var(--accent);
+      margin: 0 0 20px 0;
+      font-size: 1.3em;
+    }
+
+    .qr-container {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .qr-placeholder {
+      background: var(--panel);
+      border: 2px dashed var(--accent);
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      min-width: 200px;
+    }
+
+    .qr-icon {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    .qr-placeholder p {
+      color: var(--text);
+      margin: 0 0 5px 0;
+      font-weight: 600;
+    }
+
+    .qr-placeholder small {
+      color: var(--text);
+      opacity: 0.6;
+      font-size: 0.8em;
+    }
+
+    .qr-instructions {
+      flex: 1;
+    }
+
+    .qr-instructions p {
+      color: var(--text);
+      margin: 0 0 15px 0;
+      font-weight: 600;
+    }
+
+    .qr-instructions ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .qr-instructions li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .qr-instructions li:last-child {
+      border-bottom: none;
+    }
+
+    .sharing-stats {
+      background: var(--card);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .sharing-stats h3 {
+      color: var(--accent);
+      margin: 0 0 20px 0;
+      font-size: 1.3em;
+    }
+
+    .stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 2.5em;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      color: var(--text);
+      opacity: 0.8;
+      font-size: 0.9em;
+    }
+
+    .share-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px 0;
+      color: var(--text);
+      opacity: 0.6;
+      font-size: 0.9em;
+      border-top: 1px solid var(--border);
+    }
+
+    .version {
+      font-size: 0.8em;
+      margin-top: 5px;
+    }
+
+    /* Container fix for full screen */
+    .container {
+      height: auto !important;
+      min-height: calc(100vh - 140px) !important;
+      overflow-y: auto !important;
+      padding-bottom: 0 !important;
+    }
+
+    .chat-area {
+      height: auto !important;
+      min-height: 100% !important;
+    }
+
+    /* Dark theme fixes */
+    body.dark .share-fullpage {
+      background: var(--bg) !important;
+    }
+
+    body.dark .share-content {
+      background: var(--bg) !important;
+    }
+
+    body.dark .description,
+    body.dark .share-options,
+    body.dark .share-message,
+    body.dark .app-info,
+    body.dark .qr-section,
+    body.dark .sharing-stats {
+      background: var(--card) !important;
+      border-color: var(--border) !important;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .share-header h1 {
+        font-size: 2em;
+      }
+      
+      .share-content {
+        padding: 0 15px 30px 15px;
+      }
+      
+      .description,
+      .share-options,
+      .share-message,
+      .app-info,
+      .qr-section,
+      .sharing-stats {
+        padding: 20px;
+      }
+      
+      .share-buttons {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .info-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .qr-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .stats {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .share-content {
+        padding: 0 12px 20px 12px;
+      }
+      
+      .description,
+      .share-options,
+      .share-message,
+      .app-info,
+      .qr-section,
+      .sharing-stats {
+        padding: 15px;
+      }
+      
+      .share-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script>
+    // Share App Page Specific Logic
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Share App page loaded - running share logic');
+      
+      const shareMessage = document.getElementById('shareMessage');
+      const sharedCountEl = document.getElementById('sharedCount');
+      const userReferredEl = document.getElementById('userReferred');
+
+      // Load sharing stats
+      let sharingStats = JSON.parse(localStorage.getItem('glint_sharing_stats') || '{"sharedCount": 0, "userReferred": 0}');
+      sharedCountEl.textContent = sharingStats.sharedCount;
+      userReferredEl.textContent = sharingStats.userReferred;
+
+      // Share buttons functionality
+      document.querySelectorAll('.share-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const platform = e.currentTarget.dataset.platform;
+          shareToPlatform(platform);
+        });
+      });
+
+      // Copy message functionality
+      document.getElementById('copyMessage').addEventListener('click', function() {
+        const appLink = "https://your-glint-app-link.com";
+        const fullMessage = shareMessage.value.trim() + "\n\nDownload Link: " + appLink;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(fullMessage).then(() => {
+            showCopyConfirmation();
+          }).catch(err => {
+            console.error('Failed to copy text: ', err);
+            fallbackCopy(fullMessage);
+            showCopyConfirmation();
+          });
+        } else {
+          fallbackCopy(fullMessage);
+          showCopyConfirmation();
+        }
+
+        // Update stats
+        updateSharingStats();
+      });
+
+      function fallbackCopy(text) {
+          const tempInput = document.createElement('textarea');
+          document.body.appendChild(tempInput);
+          tempInput.value = text;
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+      }
+
+      function showCopyConfirmation() {
+          const copyBtn = document.getElementById('copyMessage');
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = '✅ Copied!';
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+          }, 2000);
+      }
+
+      function shareToPlatform(platform) {
+        const message = shareMessage.value;
+        const appLink = "https://your-glint-app-link.com";
+        const fullMessage = message.trim() + "\n\nDownload Link: " + appLink;
+        
+        switch(platform) {
+          case 'whatsapp':
+            window.open(`https://wa.me/?text=${encodeURIComponent(fullMessage)}`, '_blank');
+            break;
+          case 'telegram':
+            window.open(`https://t.me/share/url?text=${encodeURIComponent(fullMessage)}`, '_blank');
+            break;
+          case 'email':
+            window.open(`mailto:?subject=Check out GLINT AI&body=${encodeURIComponent(fullMessage)}`, '_blank');
+            break;
+          case 'sms':
+            window.open(`sms:?body=${encodeURIComponent("GLINT AI: " + appLink)}`, '_blank'); 
+            break;
+          case 'link':
+          case 'social':
+            document.getElementById('copyMessage').click();
+            return;
+        }
+
+        // Update sharing stats
+        updateSharingStats();
+      }
+
+      function updateSharingStats() {
+        sharingStats.sharedCount = (sharingStats.sharedCount || 0) + 1;
+        sharedCountEl.textContent = sharingStats.sharedCount;
+        localStorage.setItem('glint_sharing_stats', JSON.stringify(sharingStats));
+      }
+    });
+  </script>
+</body>
+</html>

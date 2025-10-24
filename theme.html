@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GLINT — Theme Customization</title>
+  
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <script src="script.js" defer></script>
+  <script src="theme.js" defer></script>
+</head>
+<body class="theme-page">
+  <header>
+    <div class="brand">
+      <div>
+        <div class="title">GLINT</div>
+        <div class="subtitle">AI-Powered Customization</div>
+      </div>
+    </div>
+    <div>
+      <button class="menu-btn" id="openDrawer">≡</button>
+    </div>
+  </header>
+  
+  <div class="overlay" id="drawerOverlay"></div>
+  
+  <div class="drawer" id="drawer">
+    <a href="index.html" id="newChatBtn">✨ New Chat</a>
+    <div style="height: 10px;"></div>
+
+    <a href="save-messages.html" id="savedChatsLink">💾 Saved Conversations</a>
+    <div style="height: 10px;"></div>
+    
+    <a href="new-project.html" id="newProjectLink">🚀 New Project</a>
+    <div style="height: 10px;"></div>
+    <a href="#" id="minihubLink">⚙️ Minihub</a>
+    <div id="minihubSubmenu" class="submenu">
+      <div class="submenu-item"><a href="theme.html" class="submenu-link">🎨 Theme</a></div>
+      <div class="submenu-item"><a href="settings.html" class="submenu-link">⚙ Settings</a></div>
+      <div class="submenu-item"><a href="privacy.html" class="submenu-link">🔒 Privacy</a></div>
+      <!-- ❌ "Save Messages" removed from Minihub -->
+      <div class="submenu-item"><a href="voice.html" class="submenu-link">🎤 Voice</a></div>
+      <div class="submenu-item"><a href="language-selection.html" class="submenu-link">🌐 Language Selection</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="supportLink">🤝 Support</a>
+    <div id="supportSubmenu" class="submenu">
+      <div class="submenu-item"><a href="send-feedback.html" class="submenu-link">📝 Send Feedback</a></div>
+      <div class="submenu-item"><a href="share-app.html" class="submenu-link">🔗 Share this App</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="toolsLink">🛠️ Tools</a>
+    <div id="toolsSubmenu" class="submenu">
+      <div class="submenu-item"><a href="backup-restore.html" class="submenu-link">💾 Backup & Restore</a></div>
+      <div class="submenu-item"><a href="clear.html" class="submenu-link">🧹 Clear Data</a></div>
+      <div class="submenu-item"><a href="export.html" class="submenu-link">📤 Export Chat</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="infoLink">ℹ Info</a>
+    <div id="infoSubmenu" class="submenu">
+      <div class="submenu-item"><a href="about.html" class="submenu-link">ℹ About</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="theme-section">
+      <h1>Theme Customization</h1>
+      <p class="description">Personalize your GLINT experience with black and white themes designed to suit your style. Select a theme below and apply it to see the change instantly.</p>
+      
+      <div class="theme-options">
+        <select id="themeSelect" class="theme-dropdown">
+          <option value="light">White Theme</option>
+          <option value="dark">Dark Theme</option>
+        </select>
+        <button class="apply-btn" id="applyThemeBtn">Apply Theme</button>
+      </div>
+      
+      <div class="theme-preview">
+        <p>Preview your selected theme below:</p>
+        <div class="preview-box" id="themePreview"></div>
+      </div>
+      
+      <div class="theme-info-box">
+        <h2>Color Variables</h2>
+        <div class="variable-grid">
+          <div class="var-item"><span class="var-color" style="background:var(--bg)"></span>BG: <span class="var-value"></span></div>
+          <div class="var-item"><span class="var-color" style="background:var(--text)"></span>Text: <span class="var-value"></span></div>
+          <div class="var-item"><span class="var-color" style="background:var(--accent)"></span>Accent: <span class="var-value"></span></div>
+          <div class="var-item"><span class="var-color" style="background:var(--panel)"></span>Panel: <span class="var-value"></span></div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <p>© 2025 AI. All Rights Reserved. | GLINT Theme Customization</p>
+        <p class="version">Version 2.1.0 | Build amazing things with AI! 🚀</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to get CSS variable value
+    function getCssVariable(variable) {
+      return getComputedStyle(document.documentElement).getPropertyValue(variable).trim() || 'N/A';
+    }
+
+    // Function to update the preview box and variables
+    function updatePreview(theme) {
+      const previewBox = document.getElementById('themePreview');
+      const currentSavedTheme = localStorage.getItem('theme') || 'light';
+      
+      // Temporarily apply the NEW theme for preview
+      document.documentElement.className = theme;
+      
+      // Update preview box
+      previewBox.style.background = getCssVariable('--card') || '#ddd';
+      
+      // Update variable grid
+      const variableNames = ['--bg', '--text', '--accent', '--panel'];
+      const variableItems = document.querySelectorAll('.variable-grid .var-item');
+      
+      variableItems.forEach((item, index) => {
+        const varName = variableNames[index];
+        const varValue = getCssVariable(varName);
+        item.querySelector('.var-color').style.background = varValue;
+        item.querySelector('.var-value').textContent = varValue;
+      });
+      
+      // Revert to saved theme
+      if (theme !== currentSavedTheme) {
+        document.documentElement.className = currentSavedTheme;
+      }
+    }
+    
+    // THEME FUNCTIONALITY ONLY - Hamburger menu script.js handle karega
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeSelect = document.getElementById('themeSelect');
+      const applyThemeBtn = document.getElementById('applyThemeBtn');
+      
+      // Set dropdown to saved theme
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      themeSelect.value = savedTheme;
+      
+      // Initial preview
+      updatePreview(savedTheme);
+
+      // Apply theme button
+      applyThemeBtn.addEventListener('click', () => {
+        const selectedTheme = themeSelect.value;
+        
+        if (typeof window.applyTheme === 'function') {
+          window.applyTheme(selectedTheme);
+          alert('✅ Theme applied successfully!');
+          updatePreview(selectedTheme);
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1000);
+        } else {
+          alert('❌ Theme.js not loaded properly');
+        }
+      });
+
+      // Update preview on dropdown change
+      themeSelect.addEventListener('change', () => {
+        updatePreview(themeSelect.value);
+      });
+    });
+  </script>
+
+  <style>
+    /* Theme Page Specific Styles */
+    body.theme-page {
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .theme-section {
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: 8px;
+      box-shadow: 0 1px 3px var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .theme-section h1 {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .description {
+      font-size: 16px;
+      color: var(--text);
+      opacity: 0.8;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .theme-options {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .theme-dropdown {
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 16px;
+      background: var(--panel);
+      color: var(--text);
+      width: 200px;
+    }
+
+    .apply-btn {
+      padding: 10px 20px;
+      background: var(--accent);
+      border: none;
+      border-radius: 6px;
+      color: var(--bot-text);
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .apply-btn:hover {
+      background: var(--accent2);
+    }
+
+    .theme-preview {
+      margin: 20px 0;
+    }
+
+    .preview-box {
+      width: 200px;
+      height: 100px;
+      margin: 10px auto 20px;
+      border-radius: 8px;
+      border: 2px solid var(--accent);
+      transition: background 0.3s;
+      box-shadow: 0 4px 10px var(--border);
+    }
+
+    .theme-info-box {
+      margin-top: 20px;
+      padding: 20px;
+      background: var(--panel);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .theme-info-box h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+
+    .variable-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .var-item {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--card);
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .var-color {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      margin-right: 8px;
+      border: 1px solid var(--text);
+    }
+
+    .var-value {
+      font-family: monospace;
+      opacity: 0.7;
+      margin-left: auto;
+    }
+
+    /* Footer Styles */
+    .footer {
+      background: var(--panel);
+      color: var(--text);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .footer p {
+      opacity: 0.8;
+      margin: 5px 0;
+    }
+
+    .footer .version {
+      opacity: 0.6;
+      font-size: 12px;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .theme-section {
+        padding: 15px;
+      }
+      .theme-options {
+        flex-direction: column;
+        align-items: center;
+      }
+      .theme-dropdown {
+        width: 100%;
+        max-width: 300px;
+      }
+      .apply-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</body>
+</html>

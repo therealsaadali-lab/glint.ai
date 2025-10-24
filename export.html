@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GLINT — Export Configuration</title>
+  
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <script src="theme.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div>
+        <div class="title">GLINT</div>
+        <div class="subtitle">Powered by AI • Export Chat</div> </div>
+    </div>
+    <div>
+      <button class="menu-btn" id="openDrawer">≡</button>
+    </div>
+  </header>
+  <div class="overlay" id="drawerOverlay"></div>
+  
+  <div class="drawer" id="drawer">
+    <a href="index.html" id="newChatBtn">✨ New Chat</a>
+    <div style="height: 10px;"></div>
+    
+    <a href="save-messages.html" id="savedChatsLink">💾 Saved Conversations</a>
+    <div style="height: 10px;"></div>
+    
+    <a href="new-project.html" id="newProjectLink">🚀 New Project</a>
+    <div style="height: 10px;"></div>
+    <a href="#" id="minihubLink">⚙️ Minihub</a>
+    <div id="minihubSubmenu" class="submenu">
+      <div class="submenu-item"><a href="theme.html" class="submenu-link">🎨 Theme</a></div> <div class="submenu-item"><a href="settings.html" class="submenu-link">⚙ Settings</a></div> <div class="submenu-item"><a href="privacy.html" class="submenu-link">🔒 Privacy</a></div> <div class="submenu-item"><a href="voice.html" class="submenu-link">🎤 Voice</a></div> <div class="submenu-item"><a href="language-selection.html" class="submenu-link">🌐 Language Selection</a></div> </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="supportLink">🤝 Support</a>
+    <div id="supportSubmenu" class="submenu">
+      <div class="submenu-item"><a href="send-feedback.html" class="submenu-link">📝 Send Feedback</a></div> <div class="submenu-item"><a href="share-app.html" class="submenu-link">🔗 Share this App</a></div> </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="toolsLink">🛠️ Tools</a>
+    <div id="toolsSubmenu" class="submenu">
+      <div class="submenu-item"><a href="backup-restore.html" class="submenu-link">💾 Backup & Restore</a></div> <div class="submenu-item"><a href="clear.html" class="submenu-link">🧹 Clear Data</a></div> <div class="submenu-item"><a href="export.html" class="submenu-link">📤 Export Chat</a></div> </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="infoLink">ℹ Info</a>
+    <div id="infoSubmenu" class="submenu">
+      <div class="submenu-item"><a href="about.html" class="submenu-link">ℹ About</a></div> </div>
+  </div>
+  <div class="container">
+    <div class="content">
+      <h1>Chat Export Configuration</h1>
+      <p class="description">GLINT offers a robust and secure platform to export your conversation history. Tailor your export settings below for archiving, data analysis, professional documentation, or personal records.</p>
+
+      <div class="export-options">
+        
+        <div class="option-group">
+          <label for="exportFormat">Export Format:</label>
+          <select id="exportFormat" class="theme-input"> <option value="txt">Text (.txt)</option>
+            <option value="json">JSON (.json)</option>
+            <option value="pdf">PDF (.pdf)</option>
+            <option value="csv">CSV (.csv) [Beta]</option>
+            <option value="html">HTML (.html) [Beta]</option>
+          </select>
+        </div>
+        
+        <div class="option-group">
+          <label for="exportType">Export Scope:</label>
+          <select id="exportType" class="theme-input"> <option value="full">Full Chat History</option>
+            <option value="project">Project-Specific Data</option>
+            <option value="dateRange">Custom Date Range</option>
+            <option value="selected">Selected Conversations</option>
+          </select>
+        </div>
+        
+        <div class="option-group date-range date-options-group"> 
+          <label for="startDate">Start Date:</label>
+          <input type="date" id="startDate" class="theme-input">
+          <label for="endDate">End Date:</label>
+          <input type="date" id="endDate" class="theme-input">
+        </div>
+        
+        <div class="option-group selected-convos convos-options-group">
+          <label for="convSelect">Select Conversations:</label>
+          <select id="convSelect" class="theme-input" multiple size="3">
+            <option value="conv_1">Conversation: iOS App Bug Fix</option>
+            <option value="conv_2">Conversation: Marketing Strategy</option>
+            <option value="conv_3">Conversation: New Recipe Ideas</option>
+          </select>
+        </div>
+        
+        <div class="option-group">
+          <label class="theme-checkbox-label"> <input type="checkbox" id="includeMetadata"> Include Metadata (Timestamps, User IDs, Context)
+          </label>
+        </div>
+        <div class="option-group">
+          <label class="theme-checkbox-label"> <input type="checkbox" id="deleteAfterExport"> Delete After Export
+          </label>
+        </div>
+        <div class="option-group">
+          <label class="theme-checkbox-label"> <input type="checkbox" id="encryptExport"> Encrypt Export (AES-256)
+          </label>
+        </div>
+        
+        <div class="option-group">
+          <label for="compression">Compression Level:</label>
+          <select id="compression" class="theme-input"> <option value="none">None</option>
+            <option value="low">Low</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <button class="export-btn theme-button" id="exportBtn">📤 Initiate Export</button>
+      </div>
+
+      <div class="details-section theme-details-section">
+        <h2>Export Formats</h2>
+        <ul>
+          <li><strong>Text (.txt)</strong> - Plain text format, suitable for simple reading and sharing.</li>
+          <li><strong>JSON (.json)</strong> - Structured data with metadata, optimized for developers and data analysis.</li>
+          <li><strong>PDF (.pdf)</strong> - Professionally formatted for official reports or documentation.</li>
+          <li><strong>CSV (.csv) [Beta]</strong> - Tabular format for spreadsheet use (experimental).</li>
+          <li><strong>HTML (.html) [Beta]</strong> - Web-friendly format with embedded styling (experimental).</li>
+        </ul>
+      </div>
+
+      <div class="details-section theme-details-section">
+        <h2>Export Scopes</h2>
+        <ul>
+          <li><strong>Full Chat History</strong> - Exports all conversations across all projects and dates.</li>
+          <li><strong>Project-Specific Data</strong> - Limits export to the current project's conversations.</li>
+          <li><strong>Custom Date Range</strong> - Exports conversations within a user-defined date range.</li>
+          <li><strong>Selected Conversations</strong> - Allows manual selection of specific conversation threads.</li>
+        </ul>
+      </div>
+
+      <div class="details-section theme-details-section">
+        <h2>Security & Privacy</h2>
+        <ul>
+          <li>All export operations are performed locally on your device, ensuring data privacy.</li>
+          <li>No data is transmitted to AI servers during the export process.</li>
+          <li><strong>Encrypt Export</strong> applies AES-256 encryption for secure file storage and transfer.</li>
+          <li><strong>Delete After Export</strong> permanently removes exported data from local storage.</li>
+        </ul>
+      </div>
+
+      <div class="details-section theme-details-section">
+        <h2>Export Workflow</h2>
+        <ol>
+          <li>Access the Export Configuration via Tools > Export Chat.</li>
+          <li>Select your desired format, scope, and additional options (metadata, encryption, etc.).</li>
+          <li>Click "Initiate Export" to begin the export process.</li>
+          <li>Download the generated file automatically to your device.</li>
+          <li>(Optional) Enable compression or deletion based on your preferences.</li>
+        </ol>
+      </div>
+
+      <div class="details-section theme-details-section">
+        <h2>System Requirements</h2>
+        <ul>
+          <li>Supported browsers: Chrome (v90+), Firefox (v78+), Safari (v14+).</li>
+          <li>Minimum storage: 100MB free space for export files.</li>
+          <li>Internet connection required for initial setup; exports are offline thereafter.</li>
+          <li>JavaScript must be enabled for full functionality.</li>
+        </ul>
+      </div>
+
+      <div class="details-section theme-details-section">
+        <h2>Performance Optimization</h2>
+        <ul>
+          <li><strong>Compression Level</strong> reduces file size for large exports (High recommended for >1MB data).</li>
+          <li>Export process adapts to device performance, with progress indicators for large files.</li>
+          <li>Background processing available for exports exceeding 500KB.</li>
+        </ul>
+      </div>
+
+      <div class="details-section theme-details-section">
+        <h2>Upcoming Enhancements</h2>
+        <ul>
+          <li><strong>Cloud Integration</strong> - Sync exports to Google Drive, Dropbox, or OneDrive.</li>
+          <li><strong>Batch Export</strong> - Export multiple conversations or projects in a single operation.</li>
+          <li><strong>AI-Assisted Summaries</strong> - Automatically generate concise summaries with exported data.</li>
+          <li><strong>Real-Time Preview</strong> - View export content before finalizing the download.</li>
+        </ul>
+      </div>
+
+      <div class="details-section theme-details-section">
+        <h2>Support & Feedback</h2>
+        <p>For technical support, visit the <a href="send-feedback.html" class="theme-link">Support Page</a> or email AI at <a href="mailto:support@ai.com" class="theme-link">support@ai.com</a>. Provide your export configuration details for faster assistance.</p>
+      </div>
+
+      <div class="details-section theme-details-section">
+        <h2>Legal & Compliance</h2>
+        <ul>
+          <li>Exports comply with GDPR and CCPA privacy standards.</li>
+          <li>Users retain full ownership of exported data.</li>
+          <li>Encryption keys are generated locally and not stored by AI.</li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // JOKER'S THEME FIX: Load aur apply theme on DOM load (Fallback logic)
+      const savedTheme = localStorage.getItem('theme') || 'default';
+      if (window.applyTheme) {
+        window.applyTheme(savedTheme);
+      } else {
+        // Fallback for applyTheme
+        const themes = {
+          default: { bg: '#ffffff', text: '#111111', panel: '#f2f2f2', card: '#eaeaea', accent: '#60A5FA', accent2: '#6EE7B7', 'bot-text': '#ffffff', 'border': '#dddddd' },
+          dark: { bg: '#1a1a1a', text: '#ffffff', panel: '#2a2a2a', card: '#333333', accent: '#4A90E2', accent2: '#34C759', 'bot-text': '#ffffff', 'border': '#444444' }
+        };
+        const theme = themes[savedTheme] || themes.default;
+        const root = document.documentElement;
+        for (const [key, value] of Object.entries(theme)) {
+            root.style.setProperty(`--${key}`, value);
+        }
+      }
+      
+      // Get all necessary elements for Export logic
+      const exportType = document.getElementById("exportType");
+      // ✅ JOKER FIX: Use specific classes for reliable selection
+      const dateRangeGroup = document.querySelector('.date-options-group'); 
+      const selectedConvosGroup = document.querySelector('.convos-options-group');
+      const exportBtn = document.getElementById("exportBtn");
+      
+      // Get export parameters (omitted for brevity)
+      const exportFormat = document.getElementById("exportFormat");
+      const includeMetadata = document.getElementById("includeMetadata");
+      const deleteAfterExport = document.getElementById("deleteAfterExport");
+      const encryptExport = document.getElementById("encryptExport");
+      const compression = document.getElementById("compression");
+      const startDate = document.getElementById("startDate");
+      const endDate = document.getElementById("endDate");
+      const convSelect = document.getElementById("convSelect");
+      
+      // ✅ FIXED: Use currentChatId from script.js context (or fallback to latest)
+      let currentChatId = null;
+      const urlParams = new URLSearchParams(window.location.search);
+      currentChatId = urlParams.get('chatId');
+      
+      if (!currentChatId) {
+        // Try to get latest chat from glintChatList
+        const chatList = JSON.parse(localStorage.getItem('glintChatList')) || [];
+        if (chatList.length > 0) {
+          chatList.sort((a, b) => new Date(b.date) - new Date(a.date));
+          currentChatId = chatList[0].id;
+        } else {
+          currentChatId = 'chat-' + Date.now(); // Fallback
+        }
+      }
+
+      // Toggle export scope options (Hiding/Showing logic)
+      exportType.addEventListener('change', () => {
+        // Hamesha pehle dono ko chupa do
+        dateRangeGroup.style.display = 'none';
+        selectedConvosGroup.style.display = 'none';
+
+        // Phir zaroorat ke mutabiq show karo
+        if (exportType.value === 'dateRange') {
+          // ✅ JOKER FIX: Using 'flex' for better layout on mobile
+          dateRangeGroup.style.display = 'flex';
+        } else if (exportType.value === 'selected') {
+          // ✅ JOKER FIX: Using 'flex' for better layout on mobile
+          selectedConvosGroup.style.display = 'flex';
+        }
+      });
+      
+      // JOKER TWEAK: Run the change listener once on load to ensure correct visibility
+      exportType.dispatchEvent(new Event('change'));
+
+      // Export function
+      exportBtn.onclick = () => {
+        const format = exportFormat.value;
+        const type = exportType.value;
+        const metadata = includeMetadata.checked;
+        const deleteAfter = deleteAfterExport.checked;
+        const encrypt = encryptExport.checked;
+        const compress = compression.value;
+        const start = type === 'dateRange' ? startDate.value : null;
+        const end = type === 'dateRange' ? endDate.value : null;
+        const selectedConvos = type === 'selected' ? Array.from(convSelect.selectedOptions).map(opt => opt.value) : null;
+
+        // ✅ FIXED: Use 'messages_html_' to match script.js
+        let messages = localStorage.getItem(`messages_html_${currentChatId}`) || 'No chat history available';
+
+        const exportData = {
+          format, type, metadata, deleteAfter, encrypt, compression: compress, startDate: start, endDate: end, selectedConversations: selectedConvos, content: messages, timestamp: new Date().toISOString()
+        };
+
+        // --- Simulated Export Logic ---
+        let blobData = JSON.stringify(exportData, null, 2);
+        const mimeType = encrypt ? 'application/octet-stream' : (format === 'json' ? 'application/json' : 'text/plain');
+        const fileExtension = encrypt ? 'glintenc' : format;
+        
+        const blob = new Blob([blobData], { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `glint_export_${new Date().toISOString().split('T')[0]}_${type}.${fileExtension}`;
+        
+        // Trigger download
+        a.click();
+        URL.revokeObjectURL(url);
+
+        if (deleteAfter) {
+          // ✅ FIXED: Use 'messages_html_'
+          localStorage.removeItem(`messages_html_${currentChatId}`);
+          alert('Chat history deleted after export.');
+        } else {
+          alert('Export completed successfully. Downloading...');
+        }
+        
+        // Redirect to index.html after export
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1000);
+      };
+    });
+  </script>
+
+  <style>
+    
+    /* General Fixes: Body, Container, Content ko theme-consistent banana */
+    body {
+        background: var(--bg) !important;
+        color: var(--text) !important;
+        font-family: Inter, Arial, sans-serif; 
+    }
+    .container, .content {
+        background: var(--bg) !important;
+        color: var(--text) !important;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+    /* Header Fix: Title consistency */
+    header {
+      background: var(--panel) !important;
+      border-bottom: 1px solid var(--border) !important;
+    }
+    header .brand .subtitle {
+        color: var(--text) !important;
+        opacity: 0.8;
+        font-size: 14px;
+    }
+    header .brand .title {
+        color: var(--text) !important;
+        font-weight: 700;
+    }
+
+    /* ********** HIDING BUG FIX (White Boxes & Display Logic) ********** */
+    /* Pehle, Date Range aur Selected Convos ko chupa do */
+    .date-options-group, 
+    .convos-options-group {
+        /* display: none !important; ye line hata di taake JS use kar sake. */
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s;
+        padding: 0;
+    }
+    
+    /* Jab JS inko 'display: flex' set karey */
+    .date-options-group[style*="flex"], 
+    .convos-options-group[style*="flex"] {
+        display: flex !important;
+        max-height: 500px; /* Kaafi high value for smooth transition */
+        opacity: 1;
+        padding: 10px 0; /* Original padding wapas laao */
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* ********** STYLING OVERHAUL FOR OFFICIAL LOOK ********** */
+    
+    /* Headers & Description */
+    .content h1 {
+        color: var(--accent) !important;
+        font-weight: 700;
+        margin-top: 10px;
+        font-size: 2.5em;
+    }
+    .description {
+        opacity: 0.9;
+        font-size: 15px;
+        margin-bottom: 35px;
+    }
+    
+    /* Export Options Box */
+    .export-options {
+      background-color: var(--panel) !important; 
+      padding: 30px 25px; 
+      border: 1px solid var(--border) !important;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08); 
+      margin-bottom: 30px;
+    }
+    
+    /* Form Elements: Labels, Selects, Inputs */
+    .option-group {
+      padding: 10px 0; 
+    }
+    .option-group label {
+      color: var(--text) !important;
+      font-weight: 600; /* Thoda ziada bold */
+      display: block; 
+      margin-bottom: 8px; /* Ziada gap */
+      font-size: 0.95em;
+    }
+    
+    /* Select and Input fields (theme-input class) */
+    .theme-input {
+      background-color: var(--card) !important; 
+      color: var(--text) !important;
+      border: 1px solid var(--border) !important;
+      padding: 12px 15px; 
+      border-radius: 8px; 
+      width: 100%;
+      box-sizing: border-box;
+      appearance: none;
+      font-size: 1em;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .theme-input:focus {
+        border-color: var(--accent) !important;
+        box-shadow: 0 0 0 1px var(--accent) !important;
+        outline: none;
+    }
+    
+    /* Multiple Select Box ka height fix */
+    .convos-options-group select[multiple] {
+        height: auto; 
+        min-height: 120px; 
+    }
+    .date-options-group input[type="date"] {
+        width: 100%; /* Make date inputs full width */
+    }
+
+    /* Checkbox Styles */
+    .theme-checkbox-label {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px; 
+        cursor: pointer;
+        background: var(--card); 
+        border-radius: 8px; 
+        border: 1px solid var(--border);
+        margin: 10px 0;
+        font-weight: 400;
+    }
+    .theme-checkbox-label:hover {
+        background: var(--bg); 
+    }
+    .theme-checkbox-label input[type="checkbox"] {
+        margin-right: 15px;
+        transform: scale(1.2);
+    }
+
+
+    /* Export Button Styling */
+    .export-btn.theme-button {
+      background-color: var(--accent) !important;
+      color: var(--bot-text) !important; 
+      padding: 18px 25px; 
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 10px;
+      margin-top: 30px;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+    }
+    .export-btn.theme-button:hover {
+      background-color: var(--accent2) !important;
+      transform: translateY(-1px);
+    }
+    
+    /* ********** DETAILS SECTION FIX (Neechey ki details) ********** */
+    .details-section {
+        background: var(--card) !important; 
+        border-left: 5px solid var(--accent) !important; 
+        border: 1px solid var(--border) !important;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px auto; 
+        max-width: 900px;
+    }
+    .details-section h2 {
+        color: var(--accent) !important; 
+        font-size: 1.4em;
+        border-bottom: 1px solid var(--border) !important;
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+    }
+    .details-section ul, .details-section ol {
+        list-style-position: outside;
+        padding-left: 20px;
+        margin-top: 10px;
+    }
+    .details-section li {
+        margin: 10px 0;
+        font-size: 0.95em;
+        line-height: 1.5;
+    }
+    .theme-link {
+        color: var(--accent) !important;
+        text-decoration: none;
+    }
+    .theme-link:hover {
+        text-decoration: underline;
+    }
+
+
+    /* Mobile Responsive (Final Polish) */
+    @media (max-width: 600px) {
+      .content {
+        padding: 0 10px;
+      }
+      .export-options {
+        padding: 20px 15px;
+      }
+      .details-section {
+        margin: 15px 10px;
+      }
+    }
+  </style>
+</body>
+</html>

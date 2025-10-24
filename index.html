@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GLINT — Chat</title>
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="default">
+  <header>
+    <div class="brand">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div>
+          <div class="title">GLINT</div>
+          <div class="subtitle" id="chatSubtitle">Your AI Assistant · New Chat</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="menu-btn" id="openDrawer">≡</button>
+    </div>
+  </header>
+
+  <div class="overlay" id="drawerOverlay"></div>
+
+  <div class="drawer" id="drawer">
+    <a href="javascript:void(0)" id="newChatBtn">✨ New Chat</a>
+    <div style="height: 10px;"></div>
+    <a href="save-messages.html" id="savedChatsLink">💾 Saved Conversations</a>
+    <div style="height: 10px;"></div>
+    <a href="new-project.html" id="newProjectLink">🚀 New Project</a>
+    <div style="height: 10px;"></div>
+    <a href="#" id="minihubLink">⚙️ Minihub</a>
+    <div id="minihubSubmenu" class="submenu">
+      <div class="submenu-item"><a href="theme.html" class="submenu-link">🎨 Theme</a></div>
+      <div class="submenu-item"><a href="settings.html" class="submenu-link">⚙ Settings</a></div>
+      <div class="submenu-item"><a href="privacy.html" class="submenu-link">🔒 Privacy</a></div>
+      <div class="submenu-item"><a href="voice.html" class="submenu-link">🎤 Voice</a></div>
+      <div class="submenu-item"><a href="language-selection.html" class="submenu-link">🌐 Language Selection</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="supportLink">🤝 Support</a>
+    <div id="supportSubmenu" class="submenu">
+      <div class="submenu-item"><a href="send-feedback.html" class="submenu-link">📝 Send Feedback</a></div>
+      <div class="submenu-item"><a href="share-app.html" class="submenu-link">🔗 Share this App</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="toolsLink">🛠️ Tools</a>
+    <div id="toolsSubmenu" class="submenu">
+      <div class="submenu-item"><a href="backup-restore.html" class="submenu-link">💾 Backup & Restore</a></div>
+      <div class="submenu-item"><a href="clear.html" class="submenu-link">🧹 Clear Data</a></div>
+      <div class="submenu-item"><a href="export.html" class="submenu-link">📤 Export Chat</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="infoLink">ℹ Info</a>
+    <div id="infoSubmenu" class="submenu">
+      <div class="submenu-item"><a href="about.html" class="submenu-link">ℹ About</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="project-indicator" id="projectIndicator">
+    </div>
+
+    <div class="chat-area">
+      <div class="messages" id="messages">
+        <div class="bubble bot welcome-message">
+          <p style="font-size: 1.1em; font-weight: 500; margin: 0 0 12px 0;">
+            Hello! I'm Glint, your AI assistant.
+          </p>
+          <p style="font-size: 0.95em; line-height: 1.5; margin: 0; opacity: 0.85;">
+            How can I help you today?
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-text">© 2025 glint.ai</div>
+    </div>
+  </footer>
+
+  <div class="composer">
+    <div class="media-container">
+      <button class="small-btn" id="mediaBtn">📎</button>
+      <div class="media-panel" id="mediaPanel">
+        <button class="small-btn" id="cameraBtn">📸 Camera</button>
+        <button class="small-btn" id="photosBtn">🖼️ Photos</button>
+        <button class="small-btn" id="fileBtn">📥 File</button>
+        <button class="small-btn" id="voiceBtnMedia">🎤 Voice</button>
+      </div>
+    </div>
+
+    <input type="file" id="photosInput" accept="image/*" style="display: none;" />
+    <input type="file" id="fileInput" accept="image/*,video/*,.pdf,.doc,.docx,.txt" style="display: none;" />
+
+    <input type="text" id="messageInput" placeholder="Type in Roman Urdu or English..." />
+
+    <!-- Voice Recording Panel -->
+    <div class="media-container">
+      <button class="btn-voice" id="voiceBtn">
+          <div class="voice-wave-icon">
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+          </div>
+      </button>
+      
+      <!-- Voice Recording Panel -->
+      <div class="media-panel" id="voicePanel">
+        <button class="media-option" id="startRecordBtn">
+          <i class="fas fa-microphone"></i> Start Recording
+        </button>
+        <button class="media-option" id="stopRecordBtn" disabled>
+          <i class="fas fa-stop"></i> Stop Recording
+        </button>
+        <div id="recordingTimer" style="display: none;">00:00</div>
+        <audio id="recordedAudio" controls style="display: none; width: 100%; margin: 5px 0;"></audio>
+        <button class="media-option" id="playRecordedBtn" disabled>
+          <i class="fas fa-play"></i> Play
+        </button>
+        <button class="media-option" id="saveRecordedBtn" disabled>
+          <i class="fas fa-save"></i> Save Voice
+        </button>
+      </div>
+    </div>
+
+    <button class="btn-send" id="sendBtn">➤</button>
+  </div>
+
+  <div id="cameraModal" class="camera-modal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeCamera">&times;</span>
+      <video id="cameraVideo" autoplay></video>
+      <button class="capture-btn" id="captureBtn">Capture Photo</button>
+    </div>
+  </div>
+
+  <script src="theme.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <script>
+    // Hide welcome message when user sends first message
+    function hideWelcomeMessage() {
+        const welcomeMsg = document.querySelector('.welcome-message');
+        if (welcomeMsg) {
+            welcomeMsg.style.display = 'none';
+        }
+    }
+
+    // Global function to update the UI based on currentProjectId
+    function updateProjectUI() {
+        const currentProjectId = localStorage.getItem('currentProjectId');
+        const chatSubtitle = document.getElementById('chatSubtitle');
+        const projectIndicator = document.getElementById('projectIndicator');
+        const welcomeMessage = document.querySelector('.welcome-message');
+
+        const allProjects = JSON.parse(localStorage.getItem('glintProjects')) || [];
+        const currentProject = allProjects.find(p => p.id === currentProjectId);
+
+        if (currentProject) {
+            chatSubtitle.innerHTML = `Project: **${currentProject.name}**`;
+
+            projectIndicator.innerHTML = `
+                <div class="project-details">
+                    <span class="project-icon">🚀</span>
+                    <h3 class="project-title">${currentProject.name}</h3>
+                    <p class="project-desc">${currentProject.description || 'No description provided.'}</p>
+                    <small>Type: ${currentProject.type} | Status: ${currentProject.status}</small>
+                </div>
+                <button class="end-project-btn" onclick="endProject('${currentProjectId}')">Finish Project</button>
+            `;
+            projectIndicator.style.display = 'flex';
+
+            if (welcomeMessage) {
+                welcomeMessage.innerHTML = `
+                  <p style="font-size: 1.1em; font-weight: 500; margin: 0 0 12px 0;">
+                    Welcome to ${currentProject.name}
+                  </p>
+                  <p style="font-size: 0.95em; line-height: 1.5; margin: 0; opacity: 0.85;">
+                    I'm Glint, your AI assistant for this ${currentProject.type} project. How can I help you?
+                  </p>
+                `;
+            }
+        } else {
+            chatSubtitle.innerHTML = `Your AI Assistant · New Chat`;
+            projectIndicator.style.display = 'none';
+
+            if (welcomeMessage) {
+                welcomeMessage.innerHTML = `
+                  <p style="font-size: 1.1em; font-weight: 500; margin: 0 0 12px 0;">
+                    Hello! I'm Glint, your AI assistant.
+                  </p>
+                  <p style="font-size: 0.95em; line-height: 1.5; margin: 0; opacity: 0.85;">
+                    How can I help you today?
+                  </p>
+                `;
+            }
+        }
+    }
+
+    // Global function to end project
+    window.endProject = function(projectId) {
+        if (confirm("Are you sure you want to finish this project? This will archive the project conversation.")) {
+            let projects = JSON.parse(localStorage.getItem('glintProjects')) || [];
+            const projectIndex = projects.findIndex(p => p.id === projectId);
+            if (projectIndex !== -1) {
+                projects[projectIndex].status = 'completed';
+                localStorage.setItem('glintProjects', JSON.stringify(projects));
+            }
+            localStorage.removeItem('currentProjectId');
+            alert("Project finished and archived. Starting a new general chat.");
+            updateProjectUI();
+        }
+    };
+
+    // Voice Button Logic (Full Sync with voice.html)
+    const voiceBtn = document.getElementById('voiceBtn');
+    if (voiceBtn) {
+        let recognition;
+        let isListening = false;
+
+        voiceBtn.addEventListener('click', () => {
+            voiceBtn.classList.toggle('active');
+            if (!isListening) {
+                startVoiceRecognition();
+            } else {
+                stopVoiceRecognition();
+            }
+        });
+
+        function startVoiceRecognition() {
+            isListening = true;
+            const savedVoice = JSON.parse(localStorage.getItem('voiceSettings')) || { voice: 'male', style: 'calm', language: 'roman-urdu' };
+            const langCode = getLanguageCode(savedVoice.language);
+
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert("Voice recognition not supported in your browser.");
+                return;
+            }
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = langCode;
+            recognition.interimResults = false;
+
+            recognition.onstart = () => {
+                console.log("Voice recognition started.");
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('messageInput').value = transcript;
+                stopVoiceRecognition();
+            };
+
+            recognition.onerror = (event) => {
+                console.error("Voice recognition error:", event.error);
+                stopVoiceRecognition();
+            };
+
+            recognition.start();
+        }
+
+        function stopVoiceRecognition() {
+            isListening = false;
+            if (recognition) {
+                recognition.stop();
+            }
+        }
+
+        // Helper: Get language code for speech recognition
+        function getLanguageCode(lang) {
+            const langMap = {
+                'roman-urdu': 'en-US',
+                'urdu': 'ur-PK',
+                'english': 'en-US',
+                'arabic': 'ar-SA',
+                'chinese': 'zh-CN',
+                'hindi': 'hi-IN'
+            };
+            return langMap[lang] || 'en-US';
+        }
+    }
+
+    // Voice Button in Media Panel
+    const voiceBtnMedia = document.getElementById('voiceBtnMedia');
+    if (voiceBtnMedia) {
+        voiceBtnMedia.addEventListener('click', function() {
+            // Hide media panel
+            const mediaPanel = document.getElementById('mediaPanel');
+            if (mediaPanel) {
+                mediaPanel.classList.remove('show');
+            }
+            
+            // Show voice panel
+            const voicePanel = document.getElementById('voicePanel');
+            if (voicePanel) {
+                voicePanel.classList.toggle('show');
+            }
+        });
+    }
+
+    // SIMPLE FIX: Only keep essential functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        // Send button click handler - hide welcome message on first send
+        const sendBtn = document.getElementById('sendBtn');
+        const messageInput = document.getElementById('messageInput');
+
+        if (sendBtn) {
+            sendBtn.addEventListener('click', function() {
+                const message = messageInput.value.trim();
+                if (message) {
+                    hideWelcomeMessage();
+                }
+            });
+        }
+
+        if (messageInput) {
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const message = messageInput.value.trim();
+                    if (message) {
+                        hideWelcomeMessage();
+                    }
+                }
+            });
+        }
+
+        // Initial UI load
+        updateProjectUI();
+
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                updateProjectUI();
+            }
+        });
+
+        // Close voice panel when clicking outside
+        document.addEventListener('click', function(event) {
+            const voicePanel = document.getElementById('voicePanel');
+            const voiceBtn = document.getElementById('voiceBtn');
+            
+            if (voicePanel && voicePanel.classList.contains('show') && 
+                !voicePanel.contains(event.target) && 
+                !voiceBtn.contains(event.target)) {
+                voicePanel.classList.remove('show');
+            }
+        });
+    });
+  </script>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --panel: #f2f2f2;
+      --card: #eaeaea;
+      --accent: #60A5FA;
+      --accent-rgb: 96, 165, 250;
+      --accent-secondary: #6EE7B7;
+      --bot-text: #ffffff;
+      --border: #dddddd;
+    }
+
+    body.dark {
+      --bg: #1a1a1a;
+      --text: #ffffff;
+      --panel: #2a2a2a;
+      --card: #333333;
+      --accent: #4A90E2;
+      --accent-rgb: 74, 144, 226;
+      --accent-secondary: #34C759;
+      --bot-text: #ffffff;
+      --border: #444444;
+    }
+
+    .container {
+      /* Height adjust kiya taa ke composer ke upar jagah milay */
+      height: calc(100vh - 64px - 70px); /* Header (64px) + Composer (70px) */
+      overflow-y: auto;
+      padding-bottom: 20px;
+    }
+
+    .project-indicator {
+      display: none;
+      background: var(--card) !important;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 10px;
+      max-width: 96%;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .project-indicator .project-details {
+      flex-grow: 1;
+    }
+
+    .project-indicator .project-title {
+      color: var(--accent);
+      font-size: 1.2em;
+      margin: 0;
+      font-weight: 600;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .project-indicator .project-desc {
+      font-size: 0.9em;
+      color: var(--text);
+      opacity: 0.8;
+      margin: 5px 0;
+    }
+
+    .project-indicator small {
+      font-size: 0.75em;
+      color: var(--text);
+      opacity: 0.6;
+      display: block;
+    }
+
+    .project-indicator .end-project-btn {
+      background: var(--panel);
+      color: #ff4444;
+      border: 1px solid #ff4444;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .project-indicator .end-project-btn:hover {
+      background: #ff4444;
+      color: white;
+    }
+
+    /* Composer Fix - Flexbox aur widths ko adjust kiya gaya hai */
+    .composer {
+      padding: 10px 15px;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      border-top: 1px solid var(--border);
+      background: var(--panel) !important;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      /* Composer ki position style.css mein fixed/bottom: 0 hai */
+    }
+
+    /* Media button aur Send button ko shrink hone se roko */
+    .media-container, .btn-send {
+        flex-shrink: 0; 
+    }
+    
+    /* Input field ko zyada jagah do aur choti screen par shrink hone do */
+    #messageInput {
+      flex-grow: 1;
+      min-width: 0; /* Important for flex items */
+    }
+
+    .footer {
+      display: none;
+    }
+
+    .messages .welcome-message {
+      margin: 30px auto;
+      text-align: center;
+      max-width: 500px;
+      background: var(--card) !important;
+      color: var(--text) !important;
+      border-radius: 12px;
+      box-shadow: none;
+      border-left: 4px solid #00d4ff;
+      padding: 20px;
+    }
+
+    .submenu-link {
+      color: var(--text);
+      text-decoration: none;
+      display: block;
+      padding: 8px 10px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .submenu-link:hover {
+      background: var(--bg);
+    }
+
+    /* .btn-voice ki styling ko style.css ke barabar kiya gaya hai taake layout theek ho */
+    .btn-voice {
+      background: var(--bg); 
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0; 
+      border-radius: 8px; /* Square button jaisa style.css mein hai */
+      cursor: pointer;
+      line-height: 1; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+      height: 48px; /* style.css ke #messageInput ki height ke barabar */
+      width: 48px; /* Square button */
+      flex-shrink: 0; /* Shrink hone se roko */
+      font-size: 1.4em; 
+    }
+
+    .btn-voice:hover {
+        background: var(--card);
+        color: var(--accent);
+    }
+    
+    .voice-wave-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 20px;
+      width: 20px;
+      gap: 2px;
+    }
+
+    .wave-bar {
+      width: 3px;
+      background: linear-gradient(to top, var(--accent) 0%, var(--accent-secondary) 100%);
+      border-radius: 1px;
+      height: 40%;
+      transition: height 0.2s ease-in-out;
+    }
+
+    .btn-voice.active .wave-bar:nth-child(1) { animation: voiceWave 1.2s ease-in-out 0s infinite alternate; }
+    .btn-voice.active .wave-bar:nth-child(2) { animation: voiceWave 1.2s ease-in-out 0.1s infinite alternate; }
+    .btn-voice.active .wave-bar:nth-child(3) { animation: voiceWave 1.2s ease-in-out 0.2s infinite alternate; }
+    .btn-voice.active .wave-bar:nth-child(4) { animation: voiceWave 1.2s ease-in-out 0.3s infinite alternate; }
+    .btn-voice.active .wave-bar:nth-child(5) { animation: voiceWave 1.2s ease-in-out 0.4s infinite alternate; }
+
+    @keyframes voiceWave {
+      0% { height: 40%; }
+      50% { height: 100%; }
+      100% { height: 40%; }
+    }
+
+    /* Voice Panel Specific Styles */
+    #voicePanel {
+      min-width: 200px;
+      bottom: 100%;
+      left: 0;
+    }
+
+    #recordingTimer {
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--accent);
+      padding: 5px;
+      margin: 5px 0;
+      background: var(--panel);
+      border-radius: 4px;
+    }
+
+    /* Media message styling */
+    .media-message {
+      max-width: 300px !important;
+      margin: 10px 0;
+      padding: 10px !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+    }
+
+    .media-header {
+      margin-bottom: 8px;
+      width: 100%;
+    }
+
+    .media-header strong {
+      font-size: 14px;
+      color: var(--bot-text);
+    }
+
+    .media-preview {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 5px 0;
+      border: 1px solid var(--border);
+    }
+
+    .voice-player {
+      width: 100%;
+      margin: 5px 0;
+      border-radius: 20px;
+      height: 40px;
+    }
+
+    .media-time {
+      font-size: 0.8em;
+      color: var(--bot-text);
+      opacity: 0.7;
+      margin-top: 5px;
+      align-self: flex-end;
+    }
+  </style>
+</body>
+</html>

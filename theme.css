@@ -1,0 +1,119 @@
+/* theme.css - Theme Variables and Theme-Specific Styles (Bulletproof Fix) */
+
+/* ==================== THEME VARIABLES (DEFAULT - WHITE THEME) ==================== */
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --panel: #ffffff; /* Pure white */
+  --card: #e0e0e0;
+  --accent: #000000;
+  --accent2: #000000;
+  --user-text: #000000;
+  --bot-bubble: #000000; /* Black background for bot messages */
+  --bot-text: #ffffff; /* White text for bot messages */
+  --border: rgba(0,0,0,0.1);
+  --overlay-bg: rgba(0,0,0,0.5);
+}
+
+/* DARK THEME - Black */
+html.dark {
+  --bg: #000000;
+  --text: #ffffff;
+  --panel: #333333;
+  --card: #444444;
+  --accent: #ffffff;
+  --accent2: #ffffff;
+  --user-text: #ffffff;
+  --bot-bubble: #ffffff; /* White background for bot messages */
+  --bot-text: #000000; /* Black text for bot messages (visible on white) */
+  --border: rgba(255,255,255,0.1);
+  --overlay-bg: rgba(0,0,0,0.7);
+}
+
+/* LIGHT THEME - White */
+html.light {
+  --bg: #ffffff;
+  --text: #000000;
+  --panel: #ffffff;
+  --card: #e0e0e0;
+  --accent: #000000;
+  --accent2: #000000;
+  --user-text: #000000;
+  --bot-bubble: #000000; /* Black background for bot messages */
+  --bot-text: #ffffff; /* White text for bot messages */
+  --border: rgba(0,0,0,0.1);
+  --overlay-bg: rgba(0,0,0,0.5);
+}
+
+/* ==================== THEME DEPENDENT STYLES ==================== */
+html body {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  margin: 0;
+  padding: 0;
+}
+
+html header {
+  background: var(--panel) !important;
+  color: var(--text) !important;
+  box-shadow: 0 2px 4px var(--border) !important;
+}
+
+html .composer {
+  background: var(--panel) !important;
+  border-top: 1px solid var(--border) !important;
+  box-shadow: 0 2px 4px var(--border) !important;
+}
+
+html .footer {
+  background: var(--panel) !important;
+  color: var(--text) !important;
+  border-top: 1px solid var(--border) !important;
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+html .footer p {
+  color: var(--text) !important;
+  opacity: 0.8;
+  margin: 5px 0;
+}
+
+html .footer .version {
+  color: var(--text) !important;
+  opacity: 0.6;
+  font-size: 12px;
+}
+
+html .title, html .subtitle { color: var(--text) !important; }
+html .drawer { background: var(--card) !important; color: var(--text) !important; }
+
+/* Bot message bubble - Dynamic based on theme */
+html .bubble.bot, html .bubble.bot.welcome-message {
+  background: var(--bot-bubble) !important;
+  color: var(--bot-text) !important;
+}
+
+/* User message bubble - make sure it's visible */
+html .bubble.user {
+  background: var(--card) !important; /* Changed to card color for visibility */
+  color: var(--user-text) !important;
+  border: 1px solid var(--border) !important;
+}
+
+html .composer input {
+  border: 1px solid var(--border);
+  background: var(--card) !important;
+  color: var(--text) !important;
+}
+html .message-archive-link { background: var(--accent) !important; color: var(--bot-text) !important; }
+html .drawer a:hover { background: var(--accent) !important; color: var(--bot-text) !important; }
+html .theme-btn-footer { border: 2px solid var(--text); background: var(--card) !important; color: var(--text) !important; }
+html ::-webkit-scrollbar-track { background: var(--panel) !important; }
+html ::-webkit-scrollbar-thumb { background: var(--accent) !important; }

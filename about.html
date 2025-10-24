@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GLINT — About</title>
+  
+  <link rel="stylesheet" href="theme.css" /> 
+  <link rel="stylesheet" href="style.css" />
+  
+</head>
+<body class="about-page">
+  <header>
+    <div class="brand">
+      <div>
+        <div class="title">GLINT</div>
+        <div class="subtitle">Powered by AI • About Our AI</div>
+      </div>
+    </div>
+    <div>
+      <button class="menu-btn" id="openDrawer">≡</button>
+    </div>
+  </header>
+  
+  <div class="overlay" id="drawerOverlay"></div>
+  
+  <div class="drawer" id="drawer">
+    <a href="index.html" id="newChatBtn">✨ New Chat</a>
+    <div style="height: 10px;"></div>
+    
+    <a href="save-messages.html" id="savedChatsLink">💾 Saved Conversations</a>
+    <div style="height: 10px;"></div>
+    <a href="new-project.html" id="newProjectLink">🚀 New Project</a>
+    <div style="height: 10px;"></div>
+    <a href="#" id="minihubLink">⚙️ Minihub</a>
+    <div id="minihubSubmenu" class="submenu">
+      <div class="submenu-item"><a href="theme.html">🎨 Theme</a></div>
+      <div class="submenu-item"><a href="settings.html">⚙ Settings</a></div>
+      <div class="submenu-item"><a href="privacy.html">🔒 Privacy</a></div>
+      <div class="submenu-item"><a href="voice.html">🎤 Voice</a></div>
+      <div class="submenu-item"><a href="language-selection.html">🌐 Language Selection</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="supportLink">🤝 Support</a>
+    <div id="supportSubmenu" class="submenu">
+      <div class="submenu-item"><a href="send-feedback.html">📝 Send Feedback</a></div>
+      <div class="submenu-item"><a href="share-app.html">🔗 Share this App</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="toolsLink">🛠️ Tools</a>
+    <div id="toolsSubmenu" class="submenu">
+      <div class="submenu-item"><a href="backup-restore.html">💾 Backup & Restore</a></div>
+      <div class="submenu-item"><a href="clear.html">🧹 Clear Data</a></div>
+      <div class="submenu-item"><a href="export.html">📤 Export Chat</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="infoLink">ℹ Info</a>
+    <div id="infoSubmenu" class="submenu">
+      <div class="submenu-item"><a href="about.html">ℹ About</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="chat-area">
+      <div class="about-content">
+        <h1 class="header-title">ℹ About GLINT</h1>
+        
+        <p class="description"><strong>Glint</strong> is an advanced AI assistant crafted by glint.ai, designed to be your trusted companion in navigating the digital world. Built with cutting-edge natural language processing (NLP) and multimedia capabilities, I can chat in Roman Urdu and English, analyze images, process videos, and assist with a variety of tasks. My journey began with a simple rule-based AI framework, which has evolved into a sophisticated system thanks to continuous updates and innovative features.</p>
+
+        <p class="description">I'm accessible on glint.com, x.com, and both iOS and Android apps, with free usage quotas and optional paid plans like SuperGlint for higher limits. My hamburger menu (≡) is your gateway to explore features—click it to dive into New Chat, Minihub (for themes and settings), Support, Tools, and Info. I also offer a voice mode on mobile apps and advanced modes like Think and DeepSearch for deeper responses, though my BigBrain mode remains a secret for now!</p>
+        
+        <h2>Core Features:</h2>
+        <ul class="features-list">
+          <li>💬 Chat – Instant conversations with AI-powered responses</li>
+          <li>🌐 Language Selection – Switch between Urdu, English, Arabic, Chinese, and Hindi</li>
+          <li>🎤 Voice – Engage with me using voice commands on mobile apps</li>
+          <li>🖼️ Image/Video Analysis – Process and interpret multimedia content</li>
+          <li>🧹 Clear Data – Manage your data with ease</li>
+          <li>💾 Backup & Restore – Secure your conversations</li>
+          <li>📤 Export Chat – Save chats in HTML or PDF</li>
+          <li>📝 Send Feedback – Help me improve with your suggestions</li>
+          <li>🔗 Share this App – Spread the word about Glint</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer moved outside chat-area, as in your original design -->
+  <div class="footer">
+    <div class="footer-text">© 2025 glint.ai. All Rights Reserved.</div>
+  </div>
+
+  <script src="theme.js"></script>
+  <script src="script.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedTheme = localStorage.getItem('theme') || 'default';
+      if (window.applyTheme) {
+        window.applyTheme(savedTheme);
+      }
+    });
+  </script>
+
+  <style>
+    .menu-btn {
+      color: var(--text) !important;
+      background: transparent !important;
+      border: none !important;
+      font-size: 28px;
+      line-height: 1;
+      padding: 0 5px;
+      cursor: pointer;
+    }
+    
+    body {
+      background-color: var(--bg) !important;
+      color: var(--text) !important;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--panel) !important;
+      border-bottom: 1px solid var(--border) !important;
+    }
+    
+    header .brand div {
+      color: var(--text) !important; 
+    }
+
+    .container {
+      flex: 1;
+      padding-top: 20px; 
+      background-color: var(--bg) !important;
+    }
+    
+    .chat-area {
+      max-width: 900px;
+      margin: 0 auto; 
+      padding: 0 20px;
+    }
+
+    .about-content {
+      background: var(--card) !important;
+      padding: 25px; 
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border: 1px solid var(--border) !important;
+    }
+
+    .header-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent) !important;
+      margin-bottom: 15px; 
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .about-content h2 {
+      font-size: 22px;
+      color: var(--accent);
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+    }
+
+    .description {
+      font-size: 16px;
+      color: var(--text) !important;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .description strong {
+      color: var(--accent);
+    }
+    
+    .features-list {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    .features-list li {
+      padding: 8px 0;
+      font-size: 15px;
+      color: var(--text);
+      border-bottom: 1px dotted var(--border);
+      transition: background 0.2s;
+    }
+
+    .features-list li:last-child {
+      border-bottom: none;
+    }
+
+    .features-list li:hover {
+      background: var(--panel);
+      padding-left: 5px;
+      border-radius: 4px;
+    }
+    
+    /* ✅ FIXED: Submenu ab drawer jaisa theme use karega */
+    .drawer {
+      background-color: var(--panel) !important;
+    }
+
+    .drawer a {
+      color: var(--text) !important;
+    }
+
+    .submenu {
+      /* ✅ Yahan change kiya: --bg → --panel */
+      background-color: var(--panel) !important;
+      border: 1px solid var(--border) !important;
+    }
+
+    .submenu-item a {
+      color: var(--text) !important;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6) !important;
+    }
+    
+    .footer {
+      padding: 10px 16px;
+      text-align: center;
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+      font-size: 12px;
+      color: var(--text);
+      opacity: 0.7;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding-top: 10px;
+      }
+      .chat-area {
+        margin: 0 auto;
+        padding: 0 10px;
+      }
+      .about-content {
+        padding: 15px;
+        border-radius: 8px;
+      }
+      .header-title {
+        font-size: 24px;
+      }
+      .description {
+        font-size: 15px;
+      }
+      .footer {
+        padding: 8px 12px;
+      }
+    }
+  </style>
+</body>
+</html>

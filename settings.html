@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GLINT — Settings</title>
+  
+  <link rel="stylesheet" href="theme.css" /> 
+  <link rel="stylesheet" href="style.css" />
+  <script src="theme.js" defer></script>
+  <script src="script.js" defer></script> 
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div>
+        <div class="title">GLINT</div>
+        <div class="subtitle">Powered by AI • Settings</div>
+      </div>
+    </div>
+    <div>
+      <button class="menu-btn" id="openDrawer">≡</button>
+    </div>
+  </header>
+  
+  <div class="overlay" id="drawerOverlay"></div>
+  
+  <div class="drawer" id="drawer">
+    <a href="index.html" id="newChatBtn">✨ New Chat</a>
+    <div style="height: 10px;"></div>
+
+    <a href="save-messages.html" id="savedChatsLink">💾 Saved Conversations</a>
+    <div style="height: 10px;"></div>
+    
+    <a href="new-project.html" id="newProjectLink">🚀 New Project</a>
+    <div style="height: 10px;"></div>
+    <a href="#" id="minihubLink">⚙️ Minihub</a>
+    <div id="minihubSubmenu" class="submenu">
+      <div class="submenu-item"><a href="theme.html" class="submenu-link">🎨 Theme</a></div>
+      <div class="submenu-item"><a href="settings.html" class="submenu-link">⚙ Settings</a></div>
+      <div class="submenu-item"><a href="privacy.html" class="submenu-link">🔒 Privacy</a></div>
+      <div class="submenu-item"><a href="voice.html" class="submenu-link">🎤 Voice</a></div>
+      <div class="submenu-item"><a href="language-selection.html" class="submenu-link">🌐 Language Selection</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="supportLink">🤝 Support</a>
+    <div id="supportSubmenu" class="submenu">
+      <div class="submenu-item"><a href="send-feedback.html" class="submenu-link">📝 Send Feedback</a></div>
+      <div class="submenu-item"><a href="share-app.html" class="submenu-link">🔗 Share this App</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="toolsLink">🛠️ Tools</a>
+    <div id="toolsSubmenu" class="submenu">
+      <div class="submenu-item"><a href="backup-restore.html" class="submenu-link">💾 Backup & Restore</a></div>
+      <div class="submenu-item"><a href="clear.html" class="submenu-link">🧹 Clear Data</a></div>
+      <div class="submenu-item"><a href="export.html" class="submenu-link">📤 Export Chat</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="infoLink">ℹ Info</a>
+    <div id="infoSubmenu" class="submenu">
+      <div class="submenu-item"><a href="about.html" class="submenu-link">ℹ About</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="settings-section">
+      <h1 class="header-title-main">⚙️ Application Settings</h1>
+      
+      <div class="setting-item api-key-item">
+        <h2>🔤 Text API Configuration</h2>
+        <p class="description-sub">Enter your Text API key for AI text responses and conversations.</p>
+        
+        <label for="textApiKeyInput">Text API Key</label>
+        <div class="input-group">
+          <input type="password" id="textApiKeyInput" placeholder="Enter your Text API key" />
+          <button class="save-btn" id="saveTextApiBtn">💾 Save</button>
+        </div>
+        <p class="help-text">Used for all text-based AI responses and conversations.</p>
+      </div>
+
+      <div class="setting-item api-key-item">
+        <h2>🖼️ Image API Configuration</h2>
+        <p class="description-sub">Enter your Image API key for AI image generation and processing.</p>
+        
+        <label for="imageApiKeyInput">Image API Key</label>
+        <div class="input-group">
+          <input type="password" id="imageApiKeyInput" placeholder="Enter your Image API key" />
+          <button class="save-btn" id="saveImageApiBtn">💾 Save</button>
+        </div>
+        <p class="help-text">Used for image generation, processing, and visual AI tasks.</p>
+      </div>
+
+      <div class="setting-item api-key-item">
+        <h2>🎤 Voice API Configuration</h2>
+        <p class="description-sub">Enter your Voice API key for speech recognition and text-to-speech.</p>
+        
+        <label for="voiceApiKeyInput">Voice API Key</label>
+        <div class="input-group">
+          <input type="password" id="voiceApiKeyInput" placeholder="Enter your Voice API key" />
+          <button class="save-btn" id="saveVoiceApiBtn">💾 Save</button>
+        </div>
+        <p class="help-text">Used for voice commands, speech recognition, and audio responses.</p>
+      </div>
+
+      <div class="setting-item api-key-item">
+        <h2>💻 Coding API Configuration</h2>
+        <p class="description-sub">Enter your Coding API key for AI code generation and programming tasks.</p>
+        
+        <label for="codingApiKeyInput">Coding API Key</label>
+        <div class="input-group">
+          <input type="password" id="codingApiKeyInput" placeholder="Enter your Coding API key" />
+          <button class="save-btn" id="saveCodingApiBtn">💾 Save</button>
+        </div>
+        <p class="help-text">Used for code generation, programming assistance, and developer tasks.</p>
+      </div>
+
+      <div class="setting-item">
+        <h3>🚀 Activation Guide</h3>
+        <ol class="instructions">
+          <li>Visit the official <strong>AI developer portal</strong> for each service</li>
+          <li>Create or log into your developer account</li>
+          <li>Generate separate <strong>API Keys</strong> for Text, Image, Voice, and Coding services</li>
+          <li>Copy each key and paste into the respective fields above</li>
+          <li>Save each key individually using the save buttons</li>
+        </ol>
+      </div>
+      
+      <div class="setting-item">
+        <h3>📊 API Status</h3>
+        <div class="api-status">
+          <div class="status-item">
+            <span class="status-label">Text API:</span>
+            <span class="status-indicator" id="textApiStatus">🔴 Not Configured</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Image API:</span>
+            <span class="status-indicator" id="imageApiStatus">🔴 Not Configured</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Voice API:</span>
+            <span class="status-indicator" id="voiceApiStatus">🔴 Not Configured</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Coding API:</span>
+            <span class="status-indicator" id="codingApiStatus">🔴 Not Configured</span>
+          </div>
+        </div>
+        <button class="test-btn" id="testAllApisBtn">🧪 Test All APIs</button>
+      </div>
+      
+    </div>
+  </div>
+
+  <style>
+    /* ⚠️ Important: Yeh `<style>` block hamesha HTML file mein hi rahega */
+    .menu-btn {
+      color: var(--text) !important;
+      background: transparent !important;
+      border: none !important;
+      font-size: 28px;
+      line-height: 1;
+      padding: 0 5px;
+      cursor: pointer;
+    }
+
+    body {
+        background-color: var(--bg) !important;
+        color: var(--text) !important;
+    }
+    
+    header {
+      background: var(--panel) !important;
+      border-bottom: 1px solid var(--border) !important;
+    }
+    
+    header .brand div {
+      color: var(--text) !important; 
+    }
+    
+    .container {
+        background-color: var(--bg) !important;
+        color: var(--text) !important;
+        padding-top: 20px; 
+        min-height: 100vh;
+    }
+    
+    .settings-section {
+      padding: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .header-title-main {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent) !important;
+      margin-bottom: 25px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .description-sub {
+        font-size: 15px;
+        color: var(--text);
+        opacity: 0.9;
+        margin-bottom: 20px;
+    }
+
+    .setting-item {
+      background: var(--card) !important;
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border) !important;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    
+    .setting-item h2, .setting-item h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent) !important;
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 5px;
+    }
+
+    .setting-item label {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text) !important;
+      margin-bottom: 8px;
+    }
+    
+    .input-group {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+    
+    .input-group input {
+      flex: 1;
+      padding: 14px;
+      border: 2px solid var(--border) !important;
+      border-radius: 10px;
+      font-size: 16px;
+      background: var(--bg) !important;
+      color: var(--text) !important;
+    }
+    .input-group input:focus {
+      border-color: var(--accent) !important;
+      outline: none;
+      box-shadow: 0 0 5px rgba(var(--accent-rgb), 0.5);
+    }
+    .input-group input::placeholder {
+        color: var(--text) !important;
+        opacity: 0.6;
+    }
+
+    .save-btn {
+      padding: 14px 25px;
+      background: var(--accent) !important;
+      border: none;
+      border-radius: 10px;
+      color: var(--bot-text) !important;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .save-btn:hover {
+      background: var(--accent2) !important;
+      transform: translateY(-1px);
+    }
+    
+    .help-text {
+      font-size: 13px;
+      color: var(--text) !important;
+      opacity: 0.7;
+      margin: 5px 0 0;
+      line-height: 1.5;
+    }
+    
+    .instructions {
+      color: var(--text) !important;
+      padding-left: 20px;
+      margin: 0;
+    }
+    .instructions li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+    .instructions li strong {
+        color: var(--accent);
+    }
+    
+    /* API Status Styles */
+    .api-status {
+      margin: 20px 0;
+    }
+    
+    .status-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .status-label {
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .status-indicator {
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    
+    .status-indicator.configured {
+      background: rgba(34, 197, 94, 0.2);
+      color: #16a34a;
+    }
+    
+    .status-indicator.not-configured {
+      background: rgba(239, 68, 68, 0.2);
+      color: #dc2626;
+    }
+    
+    .test-btn {
+      padding: 12px 20px;
+      background: var(--accent2) !important;
+      border: none;
+      border-radius: 10px;
+      color: var(--bot-text) !important;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      width: 100%;
+      margin-top: 10px;
+    }
+    
+    .test-btn:hover {
+      background: var(--accent) !important;
+      transform: translateY(-1px);
+    }
+    
+    @media (max-width: 768px) {
+        .settings-section {
+            padding: 15px;
+        }
+        .header-title-main {
+            font-size: 26px;
+        }
+        .input-group {
+            flex-direction: column;
+            gap: 10px;
+        }
+        .input-group input, .save-btn {
+            width: 100%;
+            font-size: 14px;
+            padding: 12px;
+        }
+        .setting-item {
+            padding: 20px;
+        }
+        .status-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+    }
+  </style>
+</body>
+</html>

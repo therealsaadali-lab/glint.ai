@@ -1,0 +1,655 @@
+/* style.css - Layout and Non-Theme Specific Styles */
+
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ==================== GLOBAL STYLES ==================== */
+html, body {
+  height: 100%; 
+  width: 100%; 
+  min-height: 100%; 
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column; 
+  font-family: Arial, sans-serif;
+  margin: 0; 
+}
+a { text-decoration: none; }
+
+/* ==================== HEADER STYLES ==================== */
+header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  background: var(--panel) !important; 
+  border-bottom: 1px solid var(--border) !important;
+}
+.brand { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+}
+.title { 
+  font-size: 18px; 
+  font-weight: 700; 
+  color: var(--text) !important; 
+}
+.subtitle { 
+  font-size: 12px; 
+  opacity: 0.6; 
+  margin-top: 2px; 
+  color: var(--text) !important; 
+}
+
+/* ==================== MESSAGE ARCHIVE LINK ==================== */
+.message-archive-link {
+  display: block;
+  padding: 8px 12px;
+  margin-top: 5px;
+  text-decoration: none;
+  font-size: 16px; 
+  font-weight: 600;
+  color: var(--bot-text) !important; 
+  background: var(--accent) !important; 
+  border: 1px solid var(--border) !important; 
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.message-archive-link:hover {
+  background: var(--accent2) !important;
+  color: var(--bot-text) !important;
+}
+
+/* ==================== HAMBURGER MENU STYLES ==================== */
+.menu-btn {
+  border: none;
+  font-size: 28px;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text) !important; 
+  line-height: 1;
+  transition: color 0.2s ease; 
+  position: relative;
+  z-index: 200; 
+  pointer-events: auto;
+}
+.menu-btn:hover {
+  color: var(--accent) !important; 
+}
+
+.drawer.open ~ header .menu-btn,
+body.drawer-open .menu-btn {
+  color: var(--text) !important; 
+}
+
+/* ==================== DRAWER STYLES ==================== */
+.drawer {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 240px;
+  height: 100%;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.2);
+  padding: 16px;
+  transition: left 0.3s ease;
+  z-index: 150; 
+  background: var(--card) !important;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.drawer.open { 
+  left: 0; 
+}
+
+.drawer a {
+  display: flex;
+  align-items: center;
+  margin: 2px 0;
+  padding: 12px 16px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  transition: all 0.2s ease;
+  background: var(--panel);
+  border: 1px solid transparent;
+}
+
+.drawer a:hover {
+  background: var(--accent);
+  color: var(--bot-text);
+  border-color: var(--border);
+}
+
+.drawer a i {
+  margin-right: 12px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Submenu toggle indicators */
+.drawer a[data-has-submenu]::after {
+  content: "›";
+  margin-left: auto;
+  font-size: 16px;
+  opacity: 0.6;
+}
+
+.drawer a[data-has-submenu].submenu-open::after {
+  content: "⌄";
+}
+
+/* ==================== SUBMENU STYLES ==================== */
+.submenu {
+  display: none;
+  padding-left: 0;
+  margin-top: 5px;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 130;
+  pointer-events: auto;
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px;
+  padding: 8px 0;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.submenu.active { 
+  display: block; 
+}
+
+.submenu-item {
+  margin: 2px 0;
+}
+
+.submenu-item a.submenu-link {
+  padding: 8px 20px 8px 40px;
+  font-size: 13px;
+  border-radius: 6px;
+  position: relative;
+  color: var(--text) !important;
+  display: block;
+  transition: background 0.2s ease, color 0.2s ease;
+  background: transparent !important;
+}
+
+.submenu-item a.submenu-link:hover {
+  background: var(--accent) !important;
+  color: var(--bot-text) !important;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  background: var(--overlay-bg);
+  z-index: 140; 
+  transition: opacity 0.3s;
+  pointer-events: auto;
+}
+.overlay.show { 
+  display: block; 
+  opacity: 1;
+}
+
+/* ==================== MAIN CONTAINER STYLES ==================== */
+.container {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==================== MESSAGES STYLES (Scrolling Fix) ==================== */
+.messages {
+  flex: 1;
+  padding: 14px;
+  /* 🛠️ JOKER FIX: Add padding at the bottom to stop content from hiding under the fixed .composer (70px composer + 15px gap = 85px) */
+  padding-bottom: 85px; 
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse; /* Naye messages uper aayen ge */
+  gap: 12px;
+  height: 100%; 
+  min-height: auto; 
+  margin-bottom: 0; 
+}
+.bubble {
+  max-width: 78%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.bubble.bot, .bubble.bot.welcome-message { 
+  align-self: flex-start; 
+  background: var(--accent); 
+  color: var(--bot-text); 
+}
+.bubble.user { 
+  align-self: flex-end; 
+  background: var(--accent);
+  color: var(--bot-text);
+}
+
+/* ==================== MEDIA MESSAGE STYLES ==================== */
+.media-message {
+  max-width: 300px !important;
+  margin: 10px 0;
+  padding: 10px !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+.media-header {
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.media-header strong {
+  font-size: 14px;
+  color: var(--bot-text);
+}
+
+.media-preview {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 5px 0;
+  border: 1px solid var(--border);
+}
+
+.voice-player {
+  width: 100%;
+  margin: 5px 0;
+  border-radius: 20px;
+  height: 40px;
+}
+
+.media-time {
+  font-size: 0.8em;
+  color: var(--bot-text);
+  opacity: 0.7;
+  margin-top: 5px;
+  align-self: flex-end;
+}
+
+/* ==================== COMPOSER STYLES (Voice Icon Fix) ==================== */
+.composer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px; /* Padding adjust kiya */
+  border-top: 1px solid var(--border);
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  height: 70px; /* Height set to 70px */
+  background: var(--panel);
+}
+
+/* Media container for positioning */
+.media-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Media panel styling - inside the paperclip */
+.media-panel {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  flex-direction: column;
+  min-width: 120px;
+  gap: 5px;
+}
+
+.media-panel.show {
+  display: flex;
+}
+
+/* Media option buttons */
+.media-option {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.media-option:hover {
+  background: var(--accent);
+  color: var(--bot-text);
+}
+
+.media-option:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.media-option:disabled:hover {
+  background: var(--panel);
+  color: var(--text);
+}
+
+/* Voice Panel Specific Styles */
+#voicePanel {
+  min-width: 200px;
+}
+
+#recordingTimer {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--accent);
+  padding: 5px;
+  margin: 5px 0;
+  background: var(--panel);
+  border-radius: 4px;
+}
+
+#recordedAudio {
+  width: 100%;
+  margin: 8px 0;
+  border-radius: 20px;
+}
+
+/* Larger search bar */
+#messageInput {
+  height: 48px !important;
+  font-size: 16px !important;
+  padding: 12px 15px !important;
+  flex: 1; /* Input field ko zyada space do */
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Voice Button Styling */
+.voice-btn {
+  background: var(--bg); 
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0; 
+  border-radius: 8px;
+  cursor: pointer;
+  line-height: 1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  height: 48px; /* Message Input ki height k barabar */
+  width: 48px; /* Square button */
+  flex-shrink: 0; 
+  font-size: 1.4em; 
+}
+
+.voice-btn:hover {
+  background: var(--card);
+  color: var(--accent);
+}
+
+/* Small buttons styling */
+.small-btn {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--bot-text);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.small-btn:hover {
+  background: var(--accent2);
+}
+
+/* Send button */
+.btn-send {
+  height: 48px; /* Message Input aur Voice Button ki height k barabar */
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--bot-text);
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-send:hover {
+  background: var(--accent2);
+}
+
+/* ==================== NEW PROJECT PAGE STYLES ==================== */
+.new-project-page .container {
+  background-color: var(--bg);
+  overflow-y: auto;
+  height: auto;
+  min-height: 100vh;
+}
+.new-project-page .chat-area {
+  background-color: var(--bg);
+  height: auto;
+  min-height: calc(100vh - 64px);
+  overflow: visible;
+  flex: none;
+}
+
+/* ==================== FOOTER STYLES ==================== */
+/* Footer ko hide kiya gaya hai (index.html mein) */
+.footer {
+  padding: 10px 16px;
+  text-align: center;
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  margin-bottom: 60px; /* composer ki height se thora kam */
+}
+
+.footer-text {
+  font-size: 12px;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+/* ==================== CAMERA MODAL STYLES ==================== */
+.camera-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
+  background: var(--card);
+  margin: 5% auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 12px;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text);
+}
+
+#cameraVideo {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.capture-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: var(--accent);
+  color: var(--bot-text);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* ==================== EXPORT.HTML SPECIFIC OVERRIDES ==================== */
+body[data-page="export"] .details-section {
+  background-color: var(--panel) !important; 
+  border: 1px solid var(--border) !important;
+  border-left: 4px solid var(--accent) !important;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  color: var(--text) !important; 
+}
+body[data-page="export"] .details-section h2 {
+  color: var(--text) !important;
+  border-bottom: 2px solid var(--border) !important;
+  padding-bottom: 5px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+body[data-page="export"] .details-section ul,
+body[data-page="export"] .details-section ol {
+  color: var(--text) !important;
+}
+body[data-page="export"] .details-section li {
+  color: var(--text) !important;
+}
+
+body[data-page="export"] .message-archive-link {
+  color: var(--text) !important; 
+  background: var(--accent) !important; 
+  border: 1px solid var(--border) !important;
+  border-radius: 6px;
+  padding: 5px 10px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+body[data-page="export"] .message-archive-link:hover {
+  background: var(--accent2) !important;
+  color: var(--bot-text) !important;
+}
+
+/* ==================== DRAWER THEME FIX FOR ALL PAGES ==================== */
+
+.drawer {
+  background-color: var(--card) !important;
+}
+
+.drawer a {
+  color: var(--text) !important;
+  background: var(--panel) !important;
+  border: 1px solid transparent !important;
+}
+
+.drawer a:hover {
+  background: var(--accent) !important;
+  color: var(--bot-text) !important;
+  border-color: var(--border) !important;
+}
+
+.submenu {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.submenu-item a.submenu-link {
+  color: var(--text) !important;
+  background: transparent !important;
+}
+
+.submenu-item a.submenu-link:hover {
+  background: var(--accent) !important;
+  color: var(--bot-text) !important;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ==================== VOICE RECORDING ANIMATION ==================== */
+@keyframes recordingPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.recording {
+  animation: recordingPulse 1s infinite;
+  color: #ff4444 !important;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 480px) {
+  .media-panel {
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 180px;
+  }
+  
+  .media-message {
+    max-width: 85% !important;
+  }
+  
+  #voicePanel {
+    min-width: 250px;
+  }
+}

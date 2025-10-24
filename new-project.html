@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GLINT — New Project</title>
+  
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <script src="script.js" defer></script>
+  <script src="theme.js" defer></script>
+</head>
+<body class="new-project-page">
+  <header>
+    <div class="brand">
+      <div>
+        <div class="title">GLINT</div>
+        <div class="subtitle">Powered by AI • New Project</div>
+      </div>
+    </div>
+    <div>
+      <button class="menu-btn" id="openDrawer">≡</button>
+    </div>
+  </header>
+  <div class="overlay" id="drawerOverlay"></div>
+  
+  <div class="drawer" id="drawer">
+    <a href="index.html" id="newChatBtn">✨ New Chat</a>
+    <div style="height: 10px;"></div>
+    
+    <a href="save-messages.html" id="savedChatsLink">💾 Saved Conversations</a>
+    <div style="height: 10px;"></div>
+    
+    <a href="new-project.html" id="newProjectLink">🚀 New Project</a>
+    <div style="height: 10px;"></div>
+    <a href="#" id="minihubLink">⚙️ Minihub</a>
+    <div id="minihubSubmenu" class="submenu">
+      <div class="submenu-item"><a href="theme.html" class="submenu-link">🎨 Theme</a></div>
+      <div class="submenu-item"><a href="settings.html" class="submenu-link">⚙ Settings</a></div>
+      <div class="submenu-item"><a href="privacy.html" class="submenu-link">🔒 Privacy</a></div>
+      <div class="submenu-item"><a href="voice.html" class="submenu-link">🎤 Voice</a></div>
+      <div class="submenu-item"><a href="language-selection.html" class="submenu-link">🌐 Language Selection</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="supportLink">🤝 Support</a>
+    <div id="supportSubmenu" class="submenu">
+      <div class="submenu-item"><a href="send-feedback.html" class="submenu-link">📝 Send Feedback</a></div>
+      <div class="submenu-item"><a href="share-app.html" class="submenu-link">🔗 Share this App</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="toolsLink">🛠️ Tools</a>
+    <div id="toolsSubmenu" class="submenu">
+      <div class="submenu-item"><a href="backup-restore.html" class="submenu-link">💾 Backup & Restore</a></div>
+      <div class="submenu-item"><a href="clear.html" class="submenu-link">🧹 Clear Data</a></div>
+      <div class="submenu-item"><a href="export.html" class="submenu-link">📤 Export Chat</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="infoLink">ℹ Info</a>
+    <div id="infoSubmenu" class="submenu">
+      <div class="submenu-item"><a href="about.html" class="submenu-link">ℹ About</a></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="chat-area">
+      <div class="project-content">
+        <h1 class="header-title">🚀 New Project</h1>
+        
+        <div class="description">
+          <p><strong>Start something amazing with GLINT!</strong> Create new projects, organize your work, and leverage AI power for your creative and professional endeavors.</p>
+          
+          <p>As your AI-powered assistant, I can help you with coding, writing, research, analysis, and much more. Let's build something great together! 🎯</p>
+        </div>
+
+        <div class="project-options">
+          <h3>🎯 Project Types</h3>
+          <div class="project-cards">
+            
+            <div class="project-card" data-type="coding">
+              <div class="card-icon">💻</div>
+              <div class="card-content">
+                <h4>Code Project</h4>
+                <p>Web development, apps, scripts, and programming</p>
+                <button class="project-btn" onclick="startProject('coding', 'Code Project')">Start Coding</button>
+              </div>
+            </div>
+            
+            <div class="project-card" data-type="writing">
+              <div class="card-icon">📝</div>
+              <div class="card-content">
+                <h4>Writing Project</h4>
+                <p>Articles, stories, documents, and content creation</p>
+                <button class="project-btn" onclick="startProject('writing', 'Writing Project')">Start Writing</button>
+              </div>
+            </div>
+            
+            <div class="project-card" data-type="research">
+              <div class="card-icon">🔍</div>
+              <div class="card-content">
+                <h4>Research Project</h4>
+                <p>Analysis, data processing, and information gathering</p>
+                <button class="project-btn" onclick="startProject('research', 'Research Project')">Start Research</button>
+              </div>
+            </div>
+            
+            <div class="project-card" data-type="creative">
+              <div class="card-icon">🎨</div>
+              <div class="card-content">
+                <h4>Creative Project</h4>
+                <p>Design, art, music, and creative endeavors</p>
+                <button class="project-btn" onclick="startProject('creative', 'Creative Project')">Get Creative</button>
+              </div>
+            </div>
+            
+            <div class="project-card" data-type="business">
+              <div class="card-icon">💼</div>
+              <div class="card-content">
+                <h4>Business Project</h4>
+                <p>Planning, strategy, and professional work</p>
+                <button class="project-btn" onclick="startProject('business', 'Business Project')">Start Business</button>
+              </div>
+            </div>
+            
+            <div class="project-card" data-type="health">
+              <div class="card-icon">🩺</div>
+              <div class="card-content">
+                <h4>Health & Fitness</h4>
+                <p>Diet planning, workout routines, and wellness goals</p>
+                <button class="project-btn" onclick="startProject('health', 'Health Project')">Start Health</button>
+              </div>
+            </div>
+
+            <div class="project-card" data-type="study">
+              <div class="card-icon">📚</div>
+              <div class="card-content">
+                <h4>Study & Education</h4>
+                <p>Course notes, exam prep, and complex concepts analysis</p>
+                <button class="project-btn" onclick="startProject('study', 'Study Project')">Start Study</button>
+              </div>
+            </div>
+            
+            <div class="project-card" data-type="finance">
+              <div class="card-icon">💰</div>
+              <div class="card-content">
+                <h4>Finance & Budgeting</h4>
+                <p>Investment research, budget tracking, and financial planning</p>
+                <button class="project-btn" onclick="startProject('finance', 'Finance Project')">Start Finance</button>
+              </div>
+            </div>
+            
+            <div class="project-card" data-type="personal">
+              <div class="card-icon">🧘</div>
+              <div class="card-content">
+                <h4>Personal Development</h4>
+                <p>Habit tracking, goal setting, and mindfulness support</p>
+                <button class="project-btn" onclick="startProject('personal', 'Personal Project')">Start Personal</button>
+              </div>
+            </div>
+            
+            <div class="project-card" data-type="learning">
+              <div class="card-icon">🎓</div>
+              <div class="card-content">
+                <h4>Skill Learning</h4>
+                <p>Education, courses, and specific skill development</p>
+                <button class="project-btn" onclick="startProject('learning', 'Learning Project')">Start Learning</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="quick-start">
+          <h3>⚡ Quick Start</h3>
+          <div class="quick-options">
+            <button class="quick-btn" onclick="quickStart('website')">
+              <span>🌐 Build a Website</span>
+            </button>
+            <button class="quick-btn" onclick="quickStart('app')">
+              <span>📱 Create an App</span>
+            </button>
+            <button class="quick-btn" onclick="quickStart('blog')">
+              <span>✍️ Start a Blog</span>
+            </button>
+            <button class="quick-btn" onclick="quickStart('analysis')">
+              <span>📊 Data Analysis</span>
+            </button>
+            <button class="quick-btn" onclick="quickStart('story')">
+              <span>📖 Write a Story</span>
+            </button>
+            <button class="quick-btn" onclick="quickStart('presentation')">
+              <span>📊 Make Presentation</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="custom-project">
+          <h3>🔧 Custom Project</h3>
+          <div class="custom-form">
+            <div class="form-group">
+              <label for="projectName">Project Name:</label>
+              <input type="text" id="projectName" placeholder="Enter your project name..." />
+            </div>
+            
+            <div class="form-group">
+              <label for="projectDescription">Project Description:</label>
+              <textarea id="projectDescription" placeholder="Describe what you want to build or create..." rows="4"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="projectType">Project Category:</label>
+              <select id="projectType">
+                <option value="general">🎯 General Project</option>
+                <option value="coding">💻 Coding & Development</option>
+                <option value="writing">📝 Writing & Content</option>
+                <option value="research">🔍 Research & Analysis</option>
+                <option value="creative">🎨 Creative Work</option>
+                <option value="business">💼 Business & Professional</option>
+                <option value="health">🩺 Health & Fitness</option> <option value="study">📚 Study & Education</option>   <option value="finance">💰 Finance & Budgeting</option> <option value="personal">🧘 Personal Development</option> <option value="learning">🎓 Skill Learning</option>
+              </select>
+            </div>
+            
+            <button class="create-btn" onclick="createCustomProject()">
+              🚀 Create Custom Project
+            </button>
+          </div>
+        </div>
+
+        <div class="project-templates">
+          <h3>📋 Project Templates</h3>
+          <div class="templates-grid">
+            <div class="template-card" onclick="useTemplate('todo-app')">
+              <h4>✅ Todo List App</h4>
+              <p>Simple task management application</p>
+              <span class="template-badge">JavaScript</span>
+            </div>
+            
+            <div class="template-card" onclick="useTemplate('blog-template')">
+              <h4>📝 Personal Blog</h4>
+              <p>Responsive blog website template</p>
+              <span class="template-badge">HTML/CSS</span>
+            </div>
+            
+            <div class="template-card" onclick="useTemplate('calculator')">
+              <h4>🧮 Calculator</h4>
+              <p>Interactive calculator application</p>
+              <span class="template-badge">JavaScript</span>
+            </div>
+            
+            <div class="template-card" onclick="useTemplate('weather-app')">
+              <h4>🌤️ Weather App</h4>
+              <p>Real-time weather application</p>
+              <span class="template-badge">API Integration</span>
+            </div>
+            
+            <div class="template-card" onclick="useTemplate('portfolio')">
+              <h4>💼 Portfolio Site</h4>
+              <p>Professional portfolio website</p>
+              <span class="template-badge">HTML/CSS/JS</span>
+            </div>
+            
+            <div class="template-card" onclick="useTemplate('chatbot')">
+              <h4>🤖 AI Chatbot</h4>
+              <p>Interactive chatbot interface</p>
+              <span class="template-badge">JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="recent-projects">
+          <h3>📁 Recent Projects</h3>
+          <div class="projects-list" id="projectsList"></div>
+        </div>
+
+        <div class="project-stats">
+          <h3>📊 Project Statistics</h3>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number" id="totalProjects">0</div>
+              <div class="stat-label">Total Projects</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="activeProjects">0</div>
+              <div class="stat-label">Active Projects</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="completedProjects">0</div>
+              <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="templatesUsed">0</div>
+              <div class="stat-label">Templates Used</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <p>© 2025 AI. All Rights Reserved. | GLINT Project Management</p>
+          <p class="version">Version 2.1.0 | Build amazing things with AI! 🚀</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // PROJECT MANAGEMENT FUNCTIONS ONLY
+    // Hamburger menu automatically handled by script.js
+    
+    function startProject(type, defaultName) {
+      const projectName = prompt(`Enter name for your ${defaultName}:`, `${defaultName} ${new Date().toLocaleDateString()}`);
+      if (projectName && projectName.trim() !== "") {
+        // ✅ Changed createProject to handle memory/description
+        createProject(projectName.trim(), type, "", true); 
+      }
+    }
+
+    function quickStart(template) {
+      const templates = {
+        website: "🌐 Build a Website",
+        app: "📱 Create an App",
+        blog: "✍️ Start a Blog",
+        analysis: "📊 Data Analysis",
+        story: "📖 Write a Story",
+        presentation: "📊 Make Presentation"
+      };
+      const quickProjectName = templates[template] + " " + new Date().toLocaleDateString();
+      const quickProjectType = 'template-' + template;
+      // ✅ Changed createProject to handle memory/description
+      createProject(quickProjectName, quickProjectType, `Quick start template: ${templates[template]}`, true);
+    }
+
+    function createCustomProject() {
+      const name = document.getElementById('projectName').value.trim();
+      const description = document.getElementById('projectDescription').value.trim();
+      const type = document.getElementById('projectType').value;
+      if (!name) {
+        alert("Please enter a project name!");
+        return;
+      }
+      // ✅ Changed createProject to handle memory/description
+      createProject(name, type, description, true);
+    }
+
+    function useTemplate(templateName) {
+      const templates = {
+        'todo-app': '✅ Todo List App',
+        'blog-template': '📝 Personal Blog',
+        'calculator': '🧮 Calculator',
+        'weather-app': '🌤️ Weather App',
+        'portfolio': '💼 Portfolio Site',
+        'chatbot': '🤖 AI Chatbot'
+      };
+      const templateProjectName = templates[templateName] + " " + new Date().toLocaleDateString();
+      const templateProjectType = 'template-' + templateName;
+      // ✅ Changed createProject to handle memory/description
+      createProject(templateProjectName, templateProjectType, `Template used: ${templates[templateName]}`, true);
+    }
+
+    function createProject(name, type, description = "", redirect = false) {
+      const projects = JSON.parse(localStorage.getItem('glintProjects')) || [];
+      const newProject = {
+        id: 'proj_' + Date.now(),
+        name: name,
+        type: type,
+        description: description,
+        // ✅ Added a 'memory' field for future system prompt integration (as requested by Guru)
+        memory: `Project Title: ${name}\nProject Type: ${type}\nDescription: ${description}`, 
+        created: new Date().toISOString(),
+        status: 'active',
+        progress: 0
+      };
+      projects.push(newProject);
+      localStorage.setItem('glintProjects', JSON.stringify(projects));
+      loadRecentProjects();
+      updateProjectStats();
+      if (redirect) {
+        openProject(newProject.id);
+      }
+    }
+
+    function loadRecentProjects() {
+      const projects = JSON.parse(localStorage.getItem('glintProjects')) || [];
+      const projectsList = document.getElementById('projectsList');
+      if (projects.length === 0) {
+        projectsList.innerHTML = `
+          <div class="no-projects">
+            <p>📁 No projects yet. Start your first project above!</p>
+          </div>
+        `;
+        return;
+      }
+      const recentProjects = projects.slice(-5).reverse();
+      projectsList.innerHTML = recentProjects.map(project => `
+        <div class="project-item">
+          <div class="project-info">
+            <h4>${project.name}</h4>
+            <p>${project.description || 'No description'}</p>
+            <small>Created: ${new Date(project.created).toLocaleDateString()} • Type: ${project.type}</small>
+          </div>
+          <div class="project-actions">
+            <button class="action-btn" onclick="openProject('${project.id}')">➤ Open</button>
+            <button class="action-btn delete" onclick="deleteProject('${project.id}')">🗑️</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateProjectStats() {
+      const projects = JSON.parse(localStorage.getItem('glintProjects')) || [];
+      document.getElementById('totalProjects').textContent = projects.length;
+      document.getElementById('activeProjects').textContent = projects.filter(p => p.status === 'active').length;
+      document.getElementById('completedProjects').textContent = projects.filter(p => p.status === 'completed').length;
+      document.getElementById('templatesUsed').textContent = projects.filter(p => p.type.startsWith('template')).length;
+    }
+
+    function openProject(projectId) {
+      const projects = JSON.parse(localStorage.getItem('glintProjects')) || [];
+      const project = projects.find(p => p.id === projectId);
+      if (project) {
+        alert(`✅ Project "${project.name}" (Type: ${project.type}) successfully saved and opened!\n\nRedirecting to chat for project work...`);
+        localStorage.setItem('currentProjectId', projectId);
+        window.location.href = "index.html";
+      } else {
+        alert("❌ Error: Project not found!");
+      }
+    }
+
+    function deleteProject(projectId) {
+      if (confirm("Are you sure you want to delete this project?")) {
+        let projects = JSON.parse(localStorage.getItem('glintProjects')) || [];
+        projects = projects.filter(p => p.id !== projectId);
+        localStorage.setItem('glintProjects', JSON.stringify(projects));
+        loadRecentProjects();
+        updateProjectStats();
+        alert("Project deleted successfully!");
+      }
+    }
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+      loadRecentProjects();
+      updateProjectStats();
+    });
+  </script>
+
+  <style>
+    /* JOKER'S FIX: Dynamic Hamburger Menu Icon */
+    .menu-btn {
+      color: var(--text) !important; /* Dynamic color based on theme */
+      background: transparent !important;
+      border: none !important;
+      font-size: 28px;
+      line-height: 1;
+      padding: 0 5px;
+      cursor: pointer;
+      position: relative;
+      z-index: 101; /* Higher than drawer */
+    }
+
+    /* Highlight when drawer is open */
+    .drawer.open ~ header .menu-btn,
+    body.drawer-open .menu-btn {
+      background: var(--accent) !important;
+      color: var(--bot-text) !important;
+    }
+
+    /* Inline Styles for Professional Look */
+    .new-project-page .container {
+      background-color: var(--bg) !important;
+      color: var(--text);
+      overflow-y: auto !important;
+      height: auto !important;
+      min-height: 100vh;
+    }
+
+    .new-project-page .chat-area {
+      background-color: var(--bg) !important;
+      height: auto !important;
+      min-height: calc(100vh - 64px);
+      overflow: visible !important;
+      flex: none;
+    }
+
+    .project-content {
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: 8px;
+      box-shadow: 0 1px 3px var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .header-title {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .description {
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      color: var(--text);
+      opacity: 0.9;
+      text-align: center;
+    }
+
+    /* Section Headers */
+    .project-options h3,
+    .quick-start h3,
+    .custom-project h3,
+    .project-templates h3,
+    .recent-projects h3,
+    .project-stats h3 {
+      color: var(--text);
+      border-bottom: 2px solid var(--panel);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-size: 22px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    /* Project Cards */
+    .project-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .project-card {
+      background: var(--panel);
+      padding: 20px;
+      border-radius: 6px;
+      text-align: left;
+      transition: background 0.2s ease;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--accent);
+    }
+
+    .project-card:hover {
+      background: var(--bg);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .card-icon {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+
+    .card-content h4 {
+      color: var(--text);
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
+    .card-content p {
+      color: var(--text);
+      margin-bottom: 15px;
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .project-btn {
+      background: var(--accent);
+      color: var(--bot-text);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      float: right;
+    }
+
+    .project-card:hover .project-btn {
+      background: var(--accent2);
+    }
+
+    /* Quick Start */
+    .quick-start {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 6px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .quick-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .quick-btn {
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .quick-btn:hover {
+      background: var(--bg);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Custom Project */
+    .custom-project {
+      background: var(--panel);
+      padding: 20px;
+      border-radius: 6px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .form-group label {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--accent);
+      background: var(--bg);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .create-btn {
+      background: var(--accent);
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      color: var(--bot-text);
+      font-size: 15px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .create-btn:hover {
+      background: var(--accent2);
+    }
+
+    /* Project Templates */
+    .project-templates {
+      margin-bottom: 30px;
+    }
+
+    .templates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .template-card {
+      background: var(--panel);
+      padding: 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      border: 1px solid var(--border);
+    }
+
+    .template-card:hover {
+      background: var(--bg);
+      border-color: var(--accent);
+    }
+
+    .template-card h4 {
+      color: var(--accent);
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+
+    .template-card p {
+      color: var(--text);
+      font-size: 12px;
+      opacity: 0.8;
+      margin-bottom: 8px;
+    }
+
+    .template-badge {
+      background: var(--accent);
+      color: var(--bot-text);
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    /* Recent Projects */
+    .recent-projects {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 6px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .project-item {
+      background: var(--panel);
+      padding: 12px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s ease;
+      border-left: 3px solid var(--accent);
+    }
+
+    .project-item:hover {
+      background: var(--bg);
+    }
+
+    .action-btn {
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+
+    .action-btn:not(.delete) {
+      background: var(--accent);
+      color: var(--bot-text);
+    }
+
+    .action-btn.delete {
+      background: var(--panel);
+      color: #ff4444;
+      border: 1px solid #ff4444;
+    }
+
+    .action-btn.delete:hover {
+      background: #ff4444;
+      color: white;
+    }
+
+    /* Project Stats */
+    .project-stats {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .stat-card {
+      background: var(--panel);
+      padding: 15px;
+      border-radius: 4px;
+      text-align: center;
+      transition: background 0.2s ease;
+      border: 1px solid var(--border);
+    }
+
+    .stat-card:hover {
+      background: var(--bg);
+    }
+
+    .stat-number {
+      font-size: 2em;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    /* Footer Theme Fix */
+    .project-content .footer {
+      background: var(--panel) !important;
+      color: var(--text) !important;
+      border-top: 1px solid var(--border) !important;
+      text-align: center;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .project-content .footer p {
+      color: var(--text) !important;
+      opacity: 0.8;
+      margin: 5px 0;
+    }
+
+    .project-content .footer .version {
+      color: var(--text) !important;
+      opacity: 0.6;
+      font-size: 12px;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .project-content {
+        padding: 15px;
+      }
+      .project-btn {
+        float: none;
+        width: 100%;
+        margin-top: 10px;
+      }
+      .project-card {
+        text-align: center;
+      }
+      .project-info {
+        width: 100%;
+      }
+      .project-actions {
+        width: 100%;
+        justify-content: space-around;
+      }
+    }
+  </style>
+</body>
+</html>
