@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GLINT — Voice Settings</title>
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div>
+        <div class="title">GLINT</div>
+        <div class="subtitle">Powered by AI • Voice Settings</div>
+      </div>
+    </div>
+    <div>
+      <button class="menu-btn" id="openDrawer">≡</button>
+    </div>
+  </header>
+  <div class="overlay" id="drawerOverlay"></div>
+  <div class="drawer" id="drawer">
+    <a href="index.html" id="newChatBtn">✨ New Chat</a>
+    <div style="height: 10px;"></div>
+    <a href="save-messages.html" id="savedChatsLink">💾 Saved Conversations</a>
+    <div style="height: 10px;"></div>
+    <a href="new-project.html" id="newProjectLink">🚀 New Project</a>
+    <div style="height: 10px;"></div>
+    <a href="#" id="minihubLink">⚙️ Minihub</a>
+    <div id="minihubSubmenu" class="submenu">
+      <div class="submenu-item"><a href="theme.html" class="submenu-link">🎨 Theme</a></div>
+      <div class="submenu-item"><a href="settings.html" class="submenu-link">⚙ Settings</a></div>
+      <div class="submenu-item"><a href="privacy.html" class="submenu-link">🔒 Privacy</a></div>
+      <div class="submenu-item"><a href="voice.html" class="submenu-link">🎤 Voice</a></div>
+      <div class="submenu-item"><a href="language-selection.html" class="submenu-link">🌐 Language Selection</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="supportLink">🤝 Support</a>
+    <div id="supportSubmenu" class="submenu">
+      <div class="submenu-item"><a href="send-feedback.html" class="submenu-link">📝 Send Feedback</a></div>
+      <div class="submenu-item"><a href="share-app.html" class="submenu-link">🔗 Share this App</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="toolsLink">🛠️ Tools</a>
+    <div id="toolsSubmenu" class="submenu">
+      <div class="submenu-item"><a href="backup-restore.html" class="submenu-link">💾 Backup & Restore</a></div>
+      <div class="submenu-item"><a href="clear.html" class="submenu-link">🧹 Clear Data</a></div>
+      <div class="submenu-item"><a href="export.html" class="submenu-link">📤 Export Chat</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="infoLink">ℹ Info</a>
+    <div id="infoSubmenu" class="submenu">
+      <div class="submenu-item"><a href="about.html" class="submenu-link">ℹ About</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="chat-area">
+      <!-- ✅ THIS SECTION NOW TAKES FULL SCREEN WIDTH -->
+      <div class="voice-settings">
+        <div class="voice-header">
+          <h1 class="header-title">🎤 Voice Settings</h1>
+          <p class="description">Customize your AI voice experience. GLINT uses a premium female voice for all interactions.</p>
+        </div>
+        <div class="voice-section">
+          <label class="section-label">1. Language (Linked with Language Selection)</label>
+          <p class="current-language">Current Language: <span id="currentLang">Loading...</span></p>
+        </div>
+        <div class="voice-section">
+          <label class="section-label">2. Voice Style</label>
+          <div class="voice-style">
+            <select id="voiceStyle" class="custom-select">
+              <option value="calm">Calm</option>
+              <option value="energetic">Energetic</option>
+              <option value="robotic">Robotic</option>
+              <option value="professional">Professional</option>
+            </select>
+            <span class="select-arrow"></span>
+          </div>
+        </div>
+        <div class="voice-section">
+          <label class="section-label">3. Preview Voice</label>
+          <button class="btn-primary" id="previewBtn">🔊 Preview Voice</button>
+        </div>
+        <div class="voice-section">
+          <label class="section-label">4. Save Settings</label>
+          <button class="btn-primary" id="saveBtn">💾 Save Settings</button>
+        </div>
+      </div>
+      <div class="footer-voice">© 2025 AI. All Rights Reserved.</div>
+    </div>
+  </div>
+
+  <script src="theme.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <script>
+    // ✅ SAME FEMALE-ONLY LOGIC (NO CHANGE)
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'default';
+      if (window.applyTheme) {
+        window.applyTheme(savedTheme);
+      }
+
+      const savedVoice = JSON.parse(localStorage.getItem('voiceSettings')) || { style: 'calm' };
+      document.getElementById('voiceStyle').value = savedVoice.style;
+
+      const savedLang = localStorage.getItem('selectedLanguage') || 'roman-urdu';
+      document.getElementById('currentLang').textContent = savedLang.charAt(0).toUpperCase() + savedLang.slice(1);
+
+      document.getElementById('previewBtn').onclick = () => {
+        if (!('speechSynthesis' in window)) {
+          alert('❌ Voice not supported in your browser.');
+          return;
+        }
+
+        const voiceStyle = document.getElementById('voiceStyle').value;
+        const lang = localStorage.getItem('selectedLanguage') || 'roman-urdu';
+
+        const texts = {
+          'roman-urdu': 'Aap ka AI assistant pesh karta hai. Yeh ek professional aawaz ka tajurba hai.',
+          'urdu': 'آپ کا AI اسسٹنٹ پیش کرتا ہے۔ یہ ایک پر فیشنل آواز کا تجربہ ہے۔',
+          'english': 'Welcome to your AI assistant. This is a premium voice experience.',
+          'hindi': 'आपका AI सहायक प्रस्तुत करता है। यह एक पेशेवर आवाज का अनुभव है।',
+          'arabic': 'مساعدك الذكاء الاصطناعي يقدم لكم تجربة صوتية احترافية.',
+          'chinese': '欢迎使用您的AI助手。这是优质语音体验。'
+        };
+
+        const utterance = new SpeechSynthesisUtterance(texts[lang] || texts.english);
+        const langMap = { 
+          'roman-urdu': 'en-US', 'urdu': 'ur-PK', 'english': 'en-US', 
+          'arabic': 'ar-SA', 'chinese': 'zh-CN', 'hindi': 'hi-IN' 
+        };
+        utterance.lang = langMap[lang] || 'en-US';
+        const rateMap = { calm: 0.9, energetic: 1.2, robotic: 0.8, professional: 1.0 };
+        utterance.rate = rateMap[voiceStyle] || 1.0;
+        utterance.pitch = 1.2; // Female pitch
+        utterance.volume = 1.0;
+
+        speechSynthesis.cancel();
+        speechSynthesis.speak(utterance);
+      };
+
+      document.getElementById('saveBtn').onclick = () => {
+        const voiceStyle = document.getElementById('voiceStyle').value;
+        localStorage.setItem('voiceSettings', JSON.stringify({ style: voiceStyle }));
+        alert('✅ Voice settings saved!');
+      };
+    });
+  </script>
+
+  <!-- ✅ CSS UPDATED FOR DRAWER THEME FIX -->
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --panel: #f2f2f2;
+      --card: #eaeaea;
+      --accent: #60A5FA;
+      --accent-rgb: 96, 165, 250;
+      --accent-secondary: #6EE7B7;
+      --bot-text: #ffffff;
+      --border: #dddddd;
+    }
+
+    body.dark {
+      --bg: #1a1a1a;
+      --text: #ffffff;
+      --panel: #2a2a2a;
+      --card: #333333;
+      --accent: #4A90E2;
+      --accent-rgb: 74, 144, 226;
+      --accent-secondary: #34C759;
+      --bot-text: #ffffff;
+      --border: #444444;
+    }
+
+    body {
+      background-color: var(--bg) !important;
+      color: var(--text) !important;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--panel) !important;
+      border-bottom: 1px solid var(--border) !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 15px; /* Responsive padding */
+      background-color: var(--bg) !important;
+      min-height: calc(100vh - 64px);
+    }
+
+    .chat-area {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ✅ FULL-SCREEN DETAIL SECTION */
+    .voice-settings {
+      background: var(--card) !important;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      border: 1px solid var(--border) !important;
+      width: 100%; /* Full width */
+      max-width: 800px; /* Comfortable max width */
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .voice-header {
+      text-align: center;
+    }
+
+    .header-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent) !important;
+      margin-bottom: 12px;
+    }
+
+    .description {
+      font-size: 16px;
+      color: var(--text) !important;
+      opacity: 0.75;
+      line-height: 1.6;
+    }
+
+    .voice-section {
+      text-align: left;
+    }
+
+    .section-label {
+      display: block;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text) !important;
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 10px;
+    }
+
+    .section-label::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 18px;
+      background-color: var(--accent);
+      border-radius: 2px;
+    }
+
+    .current-language {
+      font-size: 15px;
+      color: var(--text) !important;
+      opacity: 0.85;
+      margin: 5px 0 0 10px;
+      font-weight: 500;
+    }
+
+    .voice-style {
+      position: relative;
+      margin-top: 5px;
+      margin-left: 10px;
+    }
+
+    .custom-select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--border) !important;
+      border-radius: 8px;
+      background: var(--bg) !important;
+      color: var(--text) !important;
+      font-size: 16px;
+      appearance: none;
+      cursor: pointer;
+      padding-right: 40px;
+    }
+
+    .custom-select:focus {
+      outline: none;
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.2);
+    }
+
+    .select-arrow {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid var(--text);
+      opacity: 0.7;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, var(--accent), var(--accent-secondary)) !important;
+      color: var(--bot-text) !important;
+      border: none;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(var(--accent-rgb), 0.4);
+      opacity: 0.95;
+    }
+
+    .footer-voice {
+      text-align: center;
+      margin-top: 30px;
+      padding: 15px;
+      color: var(--text) !important;
+      opacity: 0.6;
+      font-size: 13px;
+      border-top: 1px solid var(--border) !important;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    /* ✅ FIXED: Drawer Theme Issues */
+    .drawer {
+      background-color: var(--card) !important;
+    }
+
+    .drawer a {
+      color: var(--text) !important;
+      background: var(--panel) !important;
+      border: 1px solid transparent !important;
+    }
+
+    .drawer a:hover {
+      background: var(--accent) !important;
+      color: var(--bot-text) !important;
+      border-color: var(--border) !important;
+    }
+
+    .submenu {
+      background: var(--panel) !important;
+      border: 1px solid var(--border) !important;
+    }
+
+    .submenu-item a.submenu-link {
+      color: var(--text) !important;
+      background: transparent !important;
+    }
+
+    .submenu-item a.submenu-link:hover {
+      background: var(--accent) !important;
+      color: var(--bot-text) !important;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6) !important;
+    }
+
+    @media (max-width: 768px) {
+      .voice-settings { padding: 30px 20px; }
+      .header-title { font-size: 28px; }
+      .description { font-size: 15px; }
+      .section-label { font-size: 16px; }
+      .btn-primary { padding: 13px; font-size: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .voice-settings { padding: 25px 15px; }
+      .header-title { font-size: 24px; }
+      .description { font-size: 14px; }
+      .section-label { font-size: 15px; }
+      .btn-primary { padding: 12px; font-size: 15px; }
+    }
+  </style>
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GLINT — Send Feedback</title>
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="default">
+  <header>
+    <div class="brand">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div>
+          <div class="title">GLINT</div>
+          <div class="subtitle">Send Feedback</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="menu-btn" id="openDrawer">≡</button>
+    </div>
+  </header>
+
+  <div class="overlay" id="drawerOverlay"></div>
+
+  <div class="drawer" id="drawer">
+    <a href="index.html" id="newChatBtn">✨ New Chat</a>
+    <div style="height: 10px;"></div>
+    <a href="save-messages.html" id="savedChatsLink">💾 Saved Conversations</a>
+    <div style="height: 10px;"></div>
+    <a href="new-project.html" id="newProjectLink">🚀 New Project</a>
+    <div style="height: 10px;"></div>
+    <a href="#" id="minihubLink">⚙️ Minihub</a>
+    <div id="minihubSubmenu" class="submenu">
+      <div class="submenu-item"><a href="theme.html" class="submenu-link">🎨 Theme</a></div>
+      <div class="submenu-item"><a href="settings.html" class="submenu-link">⚙ Settings</a></div>
+      <div class="submenu-item"><a href="privacy.html" class="submenu-link">🔒 Privacy</a></div>
+      <div class="submenu-item"><a href="voice.html" class="submenu-link">🎤 Voice</a></div>
+      <div class="submenu-item"><a href="language-selection.html" class="submenu-link">🌐 Language Selection</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="supportLink">🤝 Support</a>
+    <div id="supportSubmenu" class="submenu">
+      <div class="submenu-item"><a href="send-feedback.html" class="submenu-link">📝 Send Feedback</a></div>
+      <div class="submenu-item"><a href="share-app.html" class="submenu-link">🔗 Share this App</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="toolsLink">🛠️ Tools</a>
+    <div id="toolsSubmenu" class="submenu">
+      <div class="submenu-item"><a href="backup-restore.html" class="submenu-link">💾 Backup & Restore</a></div>
+      <div class="submenu-item"><a href="clear.html" class="submenu-link">🧹 Clear Data</a></div>
+      <div class="submenu-item"><a href="export.html" class="submenu-link">📤 Export Chat</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="infoLink">ℹ Info</a>
+    <div id="infoSubmenu" class="submenu">
+      <div class="submenu-item"><a href="about.html" class="submenu-link">ℹ About</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="chat-area" style="height: auto; min-height: calc(100vh - 140px);">
+      <div class="feedback-fullpage">
+        <div class="feedback-header">
+          <h1>📝 Send Feedback</h1>
+          <div class="feedback-subtitle">Help us improve GLINT!</div>
+        </div>
+
+        <div class="feedback-content">
+          <div class="description">
+            <p><strong>Your feedback is valuable in making me a better AI assistant.</strong> Whether you have suggestions, found bugs, or want to share your experience, I'm all ears!</p>
+            
+            <p>As an advanced AI by AI, I'm constantly evolving with features like multilingual chat, image/video analysis, voice mode, and more. Your input helps shape my future updates!</p>
+          </div>
+
+          <div class="feedback-form">
+            <div class="form-group">
+              <label for="feedbackType">Feedback Type:</label>
+              <select id="feedbackType" class="theme-input">
+                <option value="suggestion">💡 Suggestion</option>
+                <option value="bug">🐛 Bug Report</option>
+                <option value="feature">🚀 Feature Request</option>
+                <option value="general">💬 General Feedback</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="feedbackMessage">Your Message:</label>
+              <textarea 
+                id="feedbackMessage" 
+                placeholder="Tell us what you think... What works well? What can be improved? Any specific issues?"
+                rows="6"
+                class="theme-input"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="userEmail">Email (optional):</label>
+              <input 
+                type="email" 
+                id="userEmail" 
+                placeholder="your@email.com"
+                class="theme-input"
+              />
+              <small>If you'd like us to follow up with you</small>
+            </div>
+
+            <button class="submit-btn" id="submitFeedback">
+              📤 Send Feedback
+            </button>
+          </div>
+
+          <div class="feedback-info">
+            <h3>📋 What to Include in Your Feedback:</h3>
+            <ul>
+              <li>📱 <strong>Device & Browser:</strong> Mobile/Desktop, Chrome/Firefox etc.</li>
+              <li>🔧 <strong>Specific Issue:</strong> What exactly happened vs what you expected</li>
+              <li>🎯 <strong>Steps to Reproduce:</strong> How we can recreate the issue</li>
+              <li>💡 <strong>Your Ideas:</strong> Suggestions for new features or improvements</li>
+            </ul>
+
+            <div class="response-time">
+              <p>⏰ <strong>Response Time:</strong> We read all feedback but may not respond to every submission individually.</p>
+              <p>🔒 <strong>Privacy:</strong> Your feedback is anonymous unless you provide contact information.</p>
+            </div>
+          </div>
+
+          <div class="feedback-footer">
+            <p>© 2025 AI. All Rights Reserved. | GLINT AI Assistant</p>
+            <p class="version">Version 2.1.0 | Last Updated: October 2025</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-text">© 2025 glint.ai</div>
+    </div>
+  </footer>
+
+  <script src="theme.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <style>
+    /* Feedback Page Full Screen Styling */
+    .feedback-fullpage {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--bg);
+      padding: 0;
+      margin: 0;
+    }
+
+    .feedback-header {
+      text-align: center;
+      padding: 30px 20px 20px 20px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feedback-header h1 {
+      color: var(--accent);
+      font-size: 2.5em;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
+
+    .feedback-subtitle {
+      color: var(--text);
+      opacity: 0.7;
+      font-size: 1.1em;
+      margin: 0;
+    }
+
+    .feedback-content {
+      max-width: 100%;
+      padding: 0 20px 40px 20px;
+      background: var(--bg);
+    }
+
+    .description {
+      background: var(--card);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border-left: 4px solid var(--accent);
+      color: var(--text);
+    }
+
+    .description p {
+      margin: 0 0 15px 0;
+      line-height: 1.7;
+    }
+
+    .description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .feedback-form {
+      background: var(--card);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .theme-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    .theme-input:focus {
+      border-color: var(--accent);
+      outline: none;
+      background: var(--panel);
+    }
+
+    .form-group small {
+      display: block;
+      margin-top: 5px;
+      color: var(--text);
+      opacity: 0.7;
+      font-size: 0.9em;
+    }
+
+    .submit-btn {
+      background: var(--accent);
+      color: var(--bot-text);
+      border: none;
+      padding: 14px 30px;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.2);
+    }
+
+    .feedback-info {
+      background: var(--card);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .feedback-info h3 {
+      color: var(--accent);
+      margin: 0 0 20px 0;
+      font-size: 1.3em;
+    }
+
+    .feedback-info ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 25px 0;
+    }
+
+    .feedback-info li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .feedback-info li:last-child {
+      border-bottom: none;
+    }
+
+    .feedback-info strong {
+      color: var(--accent);
+    }
+
+    .response-time {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      color: var(--text);
+    }
+
+    .response-time p {
+      margin: 0 0 10px 0;
+      line-height: 1.6;
+    }
+
+    .response-time p:last-child {
+      margin-bottom: 0;
+    }
+
+    .feedback-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px 0;
+      color: var(--text);
+      opacity: 0.6;
+      font-size: 0.9em;
+      border-top: 1px solid var(--border);
+    }
+
+    .version {
+      font-size: 0.8em;
+      margin-top: 5px;
+    }
+
+    /* Container fix for full screen */
+    .container {
+      height: auto !important;
+      min-height: calc(100vh - 140px) !important;
+      overflow-y: auto !important;
+      padding-bottom: 0 !important;
+    }
+
+    .chat-area {
+      height: auto !important;
+      min-height: 100% !important;
+    }
+
+    /* Dark theme fixes */
+    body.dark .feedback-fullpage {
+      background: var(--bg) !important;
+    }
+
+    body.dark .feedback-content {
+      background: var(--bg) !important;
+    }
+
+    body.dark .description,
+    body.dark .feedback-form,
+    body.dark .feedback-info {
+      background: var(--card) !important;
+      border-color: var(--border) !important;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .feedback-header h1 {
+        font-size: 2em;
+      }
+      
+      .feedback-content {
+        padding: 0 15px 30px 15px;
+      }
+      
+      .description,
+      .feedback-form,
+      .feedback-info {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .feedback-content {
+        padding: 0 12px 20px 12px;
+      }
+      
+      .description,
+      .feedback-form,
+      .feedback-info {
+        padding: 15px;
+      }
+    }
+  </style>
+
+  <script>
+    // Feedback Page Specific Logic
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Send Feedback page loaded - running feedback logic');
+      
+      // Feedback submission
+      document.getElementById('submitFeedback').addEventListener('click', function() {
+        const feedbackType = document.getElementById('feedbackType').value;
+        const message = document.getElementById('feedbackMessage').value;
+        const email = document.getElementById('userEmail').value;
+
+        if (!message.trim()) {
+          alert('Please enter your feedback message!');
+          return;
+        }
+
+        // Simulate feedback submission
+        const feedbackData = {
+          type: feedbackType,
+          message: message,
+          email: email,
+          timestamp: new Date().toISOString()
+        };
+
+        // Save to localStorage (simulated)
+        let allFeedback = JSON.parse(localStorage.getItem('glint_feedback') || '[]');
+        allFeedback.push(feedbackData);
+        localStorage.setItem('glint_feedback', JSON.stringify(allFeedback));
+
+        // Show success message
+        alert('✅ Thank you for your feedback! We appreciate your input in improving GLINT.');
+        
+        // Clear form
+        document.getElementById('feedbackMessage').value = '';
+        document.getElementById('userEmail').value = '';
+      });
+    });
+  </script>
+</body>
+</html>

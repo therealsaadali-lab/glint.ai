@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GLINT — Clear Data</title>
+  <link rel="stylesheet" href="theme.css" /> 
+  <link rel="stylesheet" href="style.css" />
+  <script src="theme.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div>
+        <div class="title">GLINT</div>
+        <div class="subtitle">Powered by AI • Data Management</div>
+      </div>
+    </div>
+    <div>
+      <button class="menu-btn" id="openDrawer">≡</button>
+    </div>
+  </header>
+  
+  <div class="overlay" id="drawerOverlay"></div>
+  
+  <div class="drawer" id="drawer">
+    <a href="index.html" id="newChatBtn">✨ New Chat</a>
+    <div style="height: 10px;"></div>
+    
+    <a href="save-messages.html" id="savedChatsLink">💾 Saved Conversations</a>
+    <div style="height: 10px;"></div>
+    
+    <a href="new-project.html" id="newProjectLink">🚀 New Project</a>
+    <div style="height: 10px;"></div>
+    <a href="#" id="minihubLink">⚙️ Minihub</a>
+    <div id="minihubSubmenu" class="submenu">
+      <div class="submenu-item"><a href="theme.html" class="submenu-link">🎨 Theme</a></div>
+      <div class="submenu-item"><a href="settings.html" class="submenu-link">⚙ Settings</a></div>
+      <div class="submenu-item"><a href="privacy.html" class="submenu-link">🔒 Privacy</a></div>
+      <div class="submenu-item"><a href="voice.html" class="submenu-link">🎤 Voice</a></div>
+      <div class="submenu-item"><a href="language-selection.html" class="submenu-link">🌐 Language Selection</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="supportLink">🤝 Support</a>
+    <div id="supportSubmenu" class="submenu">
+      <div class="submenu-item"><a href="send-feedback.html" class="submenu-link">📝 Send Feedback</a></div>
+      <div class="submenu-item"><a href="share-app.html" class="submenu-link">🔗 Share this App</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="toolsLink">🛠️ Tools</a>
+    <div id="toolsSubmenu" class="submenu">
+      <div class="submenu-item"><a href="backup-restore.html" class="submenu-link">💾 Backup & Restore</a></div>
+      <div class="submenu-item"><a href="clear.html" class="submenu-link">🧹 Clear Data</a></div>
+      <div class="submenu-item"><a href="export.html" class="submenu-link">📤 Export Chat</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="infoLink">ℹ Info</a>
+    <div id="infoSubmenu" class="submenu">
+      <div class="submenu-item"><a href="about.html" class="submenu-link">ℹ About</a></div>
+    </div>
+  </div>
+
+  <div class="full-screen-container">
+    <div class="clear-section">
+      <h2 class="header-title">🧹 Clear All Data</h2>
+      <p class="description">This action will **permanently delete** all chat messages, saved data, and settings. **This cannot be undone.** Please review the options carefully.</p>
+      
+      <div class="data-options">
+        <div class="option-card">
+            <h4>⚙️ App Settings (Excluding Theme)</h4>
+            <p>Resets language, voice, and minor preferences.</p>
+        </div>
+        <div class="option-card">
+            <h4>💬 Chat History</h4>
+            <p>Removes all conversation messages.</p>
+        </div>
+      </div>
+      
+      <div class="confirmation">
+        <input type="checkbox" id="confirmClear" name="confirmClear">
+        <label for="confirmClear">I understand and want to **permanently delete** my GLINT data</label>
+      </div>
+      
+      <div class="button-group">
+        <button class="clear-btn" onclick="clearAllData()" disabled>Permanently Clear All Data</button>
+        <button class="cancel-btn" onclick="cancelClear()">Cancel & Go Back</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const confirmCheckbox = document.getElementById("confirmClear");
+      const clearButton = document.querySelector(".clear-btn");
+      
+      if (confirmCheckbox && clearButton) {
+        confirmCheckbox.addEventListener('change', () => {
+          clearButton.disabled = !confirmCheckbox.checked;
+        });
+      }
+
+      window.clearAllData = () => {
+        const confirmCheckbox = document.getElementById("confirmClear");
+        if (confirmCheckbox && confirmCheckbox.checked) {
+          
+          const currentTheme = localStorage.getItem('theme') || 'white';
+          
+          const settingsKeysToClear = [
+            "favourites", "currentConversationId", 
+            "voiceSettings", "selectedLanguage",
+            "glintProjects", "currentProject", "glintBackups", "currentProjectId"
+          ];
+          
+          settingsKeysToClear.forEach(key => {
+            localStorage.removeItem(key);
+          });
+          
+          const chatList = JSON.parse(localStorage.getItem('grokChatList')) || [];
+          chatList.forEach(chat => {
+              localStorage.removeItem('messages_html_' + chat.id);
+          });
+          localStorage.removeItem('grokChatList');
+          
+          localStorage.setItem('theme', currentTheme);
+          
+          console.log("Data and Chat History cleared from localStorage (theme preserved)");
+          alert("Data has been permanently deleted! Redirecting to New Chat.");
+          window.location.href = "index.html?chatId=" + Date.now(); 
+        } else {
+          alert("Please confirm the checkbox to proceed with clearing data.");
+        }
+      };
+
+      window.cancelClear = () => {
+        window.location.href = "index.html";
+      };
+
+      const savedTheme = localStorage.getItem('theme') || 'default';
+      if (window.applyTheme) {
+        window.applyTheme(savedTheme);
+      }
+    });
+  </script>
+
+  <style>
+    /* DYNAMIC MENU ICON: Theme-based color */
+    .menu-btn {
+      color: var(--text) !important;
+      background: transparent !important;
+      border: none !important;
+      font-size: 28px;
+      line-height: 1;
+      padding: 0 5px;
+      cursor: pointer;
+    }
+    
+    /* PROFESSIONAL FULL-SCREEN STYLES */
+    
+    header {
+      background: var(--panel) !important;
+      border-bottom: 1px solid var(--border) !important;
+    }
+    
+    header .brand div {
+      color: var(--text) !important; 
+    }
+    
+    body {
+      background-color: var(--bg) !important;
+      color: var(--text) !important;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .full-screen-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-color: var(--bg) !important;
+      min-height: calc(100vh - 64px); /* Adjust for header height */
+    }
+
+    .clear-section {
+      text-align: center;
+      padding: 40px;
+      max-width: 800px; /* Increased max-width for more space */
+      width: 100%;
+      background: var(--card) !important;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      border: 1px solid var(--border) !important; 
+      margin: 0 auto;
+    }
+
+    .header-title {
+      font-size: 36px; /* Increased font size */
+      font-weight: 800;
+      color: #ff4444 !important;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .description {
+      font-size: 18px; /* Increased font size */
+      color: var(--text) !important;
+      margin-bottom: 40px; /* Increased margin */
+      line-height: 1.7;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 25px;
+    }
+
+    /* Data Options Cards */
+    .data-options {
+        display: flex;
+        gap: 30px; /* Increased gap */
+        margin-bottom: 40px; /* Increased margin */
+        justify-content: center;
+        flex-wrap: wrap; 
+    }
+    
+    .option-card {
+        flex: 1;
+        min-width: 300px; /* Increased min-width */
+        max-width: 350px; /* Increased max-width */
+        padding: 20px; /* Increased padding */
+        background: var(--panel);
+        border-radius: 12px; /* Increased border radius */
+        border: 2px solid #ff4444; /* Increased border */
+        text-align: left;
+        transition: transform 0.2s;
+    }
+    
+    .option-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 68, 68, 0.25); /* Increased shadow */
+    }
+    
+    .option-card h4 {
+        font-size: 18px; /* Increased font size */
+        color: var(--accent);
+        margin-bottom: 10px; /* Increased margin */
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 10px;
+    }
+    
+    .option-card p {
+        font-size: 15px; /* Increased font size */
+        opacity: 0.85;
+        color: var(--text);
+    }
+
+    .confirmation {
+      margin-bottom: 40px; /* Increased margin */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px; /* Increased gap */
+      padding: 20px; /* Increased padding */
+      background: rgba(255, 68, 68, 0.1); /* Light red background */
+      border-radius: 10px; /* Increased border radius */
+    }
+
+    .confirmation label {
+      font-weight: 700;
+      color: #ff4444 !important;
+      cursor: pointer;
+      font-size: 16px; /* Increased font size */
+    }
+
+    .confirmation input[type="checkbox"] {
+      accent-color: #ff4444;
+      width: 22px; /* Increased size */
+      height: 22px; /* Increased size */
+    }
+
+    .button-group {
+        display: flex;
+        gap: 25px; /* Increased gap */
+        justify-content: center;
+    }
+    
+    .clear-btn, .cancel-btn {
+      padding: 16px 35px; /* Increased padding */
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 18px; /* Increased font size */
+      font-weight: 700;
+      min-width: 240px; /* Increased min-width */
+    }
+    
+    .clear-btn:not(:disabled) {
+        background: #ff4444 !important;
+        color: #ffffff !important; 
+    }
+
+    .clear-btn:hover:not(:disabled) {
+      background: #cc0000 !important;
+      box-shadow: 0 6px 15px rgba(255, 68, 68, 0.5); /* Increased shadow */
+      transform: translateY(-2px);
+    }
+
+    .clear-btn:disabled {
+      background: var(--border) !important;
+      color: var(--text) !important;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .cancel-btn {
+      background: var(--panel) !important;
+      color: var(--text) !important;
+      border: 2px solid var(--border) !important; /* Increased border */
+      min-width: 180px; /* Increased min-width */
+    }
+
+    .cancel-btn:hover {
+      background: var(--bg) !important;
+      color: var(--accent) !important;
+      border-color: var(--accent) !important;
+      transform: translateY(-2px);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .full-screen-container {
+        padding: 15px;
+      }
+      .clear-section {
+        padding: 30px 20px;
+        border-radius: 12px;
+      }
+      .header-title {
+        font-size: 28px;
+      }
+      .description {
+        font-size: 16px;
+      }
+      .data-options {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .option-card {
+        text-align: center;
+        min-width: auto;
+        max-width: 100%;
+      }
+      .button-group {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .clear-btn, .cancel-btn {
+        width: 100%;
+        min-width: auto;
+        padding: 14px 20px;
+      }
+      .confirmation label {
+        text-align: left;
+        font-size: 15px;
+      }
+      .confirmation {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+  </style>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GLINT — AI Assistant</title>
+  
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <script src="theme.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div>
+        <div class="title">GLINT</div>
+        <div class="subtitle">Roman Urdu + English • Image • Video</div>
+      </div>
+    </div>
+    <div>
+      <button class="menu-btn" id="openDrawer">≡</button>
+    </div>
+  </header>
+  <div class="overlay" id="drawerOverlay"></div>
+  <div class="drawer" id="drawer">
+    <a href="index.html" id="newChatBtn">✨ New Chat</a>
+    <div style="height: 10px;"></div>
+    <a href="new-project.html" id="newProjectLink">🚀 New Project</a>
+    <div style="height: 10px;"></div>
+    <a href="#" id="minihubLink">⚙️ Minihub</a>
+    <div id="minihubSubmenu" class="submenu">
+      <div class="submenu-item"><a href="theme.html">🎨 Theme</a></div>
+      <div class="submenu-item"><a href="settings.html">⚙ Settings</a></div>
+      <div class="submenu-item"><a href="privacy.html">🔒 Privacy</a></div>
+      <div class="submenu-item"><a href="save-messages.html">💾 Save Messages</a></div>
+      <div class="submenu-item"><a href="voice.html">🎤 Voice</a></div>
+      <div class="submenu-item"><a href="language-selection.html">🌐 Language Selection</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="supportLink">🤝 Support</a>
+    <div id="supportSubmenu" class="submenu">
+      <div class="submenu-item"><a href="send-feedback.html">📝 Send Feedback</a></div>
+      <div class="submenu-item"><a href="share-app.html">🔗 Share this App</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="toolsLink">🛠️ Tools</a>
+    <div id="toolsSubmenu" class="submenu">
+      <div class="submenu-item"><a href="backup-restore.html">💾 Backup & Restore</a></div>
+      <div class="submenu-item"><a href="clear-data.html">🧹 Clear Data</a></div>
+      <div class="submenu-item"><a href="export-chat.html">📤 Export Chat</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="infoLink">ℹ Info</a>
+    <div id="infoSubmenu" class="submenu">
+      <div class="submenu-item"><a href="about.html">ℹ About</a></div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="chat-area">
+      <div class="welcome-message">
+        <h2>Welcome to Glint! 👋</h2>
+        <p>I'm your AI-powered assistant. I can help you with:</p>
+        <ul>
+          <li>💬 Chat in Roman Urdu + English</li>
+          <li>🖼️ Image analysis and description</li>
+          <li>🎥 Video processing</li>
+          <li>📝 Writing and content creation</li>
+          <li>💻 Coding and development</li>
+          <li>🔍 Research and analysis</li>
+        </ul>
+        <p>Start by typing a message below or explore the menu for more options!</p>
+      </div>
+    </div>
+    
+    <div class="composer">
+      <input type="text" placeholder="Type your message here..." id="messageInput" />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <!-- ✅ FOOTER -->
+  <footer class="footer">
+    <p>© 2025 AI. All Rights Reserved. | Glint AI Assistant</p>
+    <p class="version">Version 2.1.0 | Powered by Glint</p>
+  </footer>
+
+  <style>
+    /* Basic styling for simple.html */
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 64px);
+    }
+    
+    .chat-area {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    
+    .welcome-message {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 30px;
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    
+    .welcome-message h2 {
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+    
+    .welcome-message ul {
+      margin: 15px 0;
+      padding-left: 20px;
+    }
+    
+    .welcome-message li {
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    
+    .composer {
+      display: flex;
+      padding: 15px;
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+    }
+    
+    .composer input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--card);
+      color: var(--text);
+    }
+    
+    .composer button {
+      margin-left: 10px;
+      padding: 12px 20px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    
+    /* Footer styling */
+    .footer {
+      background: var(--panel) !important;
+      color: var(--text) !important;
+      border-top: 1px solid var(--border) !important;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .footer p {
+      color: var(--text) !important;
+      opacity: 0.8;
+      margin: 5px 0;
+    }
+    
+    .footer .version {
+      color: var(--text) !important;
+      opacity: 0.6;
+      font-size: 12px;
+    }
+  </style>
+</body>
+</html>

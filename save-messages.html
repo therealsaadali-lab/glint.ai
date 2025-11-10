@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GLINT — Saved Conversations</title>
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="default">
+  <header>
+    <div class="brand">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div>
+          <div class="title">GLINT</div>
+          <div class="subtitle">Saved Conversations</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="menu-btn" id="openDrawer">≡</button>
+    </div>
+  </header>
+
+  <div class="overlay" id="drawerOverlay"></div>
+
+  <div class="drawer" id="drawer">
+    <a href="index.html" id="newChatBtn">✨ New Chat</a>
+    <div style="height: 10px;"></div>
+    <a href="save-messages.html" id="savedChatsLink">💾 Saved Conversations</a>
+    <div style="height: 10px;"></div>
+    <a href="new-project.html" id="newProjectLink">🚀 New Project</a>
+    <div style="height: 10px;"></div>
+    <a href="#" id="minihubLink">⚙️ Minihub</a>
+    <div id="minihubSubmenu" class="submenu">
+      <div class="submenu-item"><a href="theme.html" class="submenu-link">🎨 Theme</a></div>
+      <div class="submenu-item"><a href="settings.html" class="submenu-link">⚙ Settings</a></div>
+      <div class="submenu-item"><a href="privacy.html" class="submenu-link">🔒 Privacy</a></div>
+      <div class="submenu-item"><a href="voice.html" class="submenu-link">🎤 Voice</a></div>
+      <div class="submenu-item"><a href="language-selection.html" class="submenu-link">🌐 Language Selection</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="supportLink">🤝 Support</a>
+    <div id="supportSubmenu" class="submenu">
+      <div class="submenu-item"><a href="send-feedback.html" class="submenu-link">📝 Send Feedback</a></div>
+      <div class="submenu-item"><a href="share-app.html" class="submenu-link">🔗 Share this App</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="toolsLink">🛠️ Tools</a>
+    <div id="toolsSubmenu" class="submenu">
+      <div class="submenu-item"><a href="backup-restore.html" class="submenu-link">💾 Backup & Restore</a></div>
+      <div class="submenu-item"><a href="clear.html" class="submenu-link">🧹 Clear Data</a></div>
+      <div class="submenu-item"><a href="export.html" class="submenu-link">📤 Export Chat</a></div>
+    </div>
+    <div style="height: 10px;"></div>
+    <a href="#" id="infoLink">ℹ Info</a>
+    <div id="infoSubmenu" class="submenu">
+      <div class="submenu-item"><a href="about.html" class="submenu-link">ℹ About</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="chat-area" style="height: auto; min-height: calc(100vh - 140px);">
+      <div class="saved-messages-fullpage">
+        <div class="saved-messages-header">
+          <h1>💾 Saved Conversations</h1>
+        </div>
+
+        <div class="saved-messages-content">
+          <div class="search-bar-container">
+            <input type="text" class="search-bar" id="searchBar" placeholder="Search conversations by name...">
+            <button class="btn btn-search" id="searchBtn">Search</button>
+          </div>
+          
+          <div class="messages-list" id="messagesList">
+            <!-- Conversations will be loaded here -->
+          </div>
+          
+          <div class="no-messages" id="noMessages">
+            📝 No saved conversations yet.<br>
+            <small>All your new chats will appear here automatically.</small>
+          </div>
+
+          <div class="secure-privacy">
+            🔒 Secure and Private - Your conversations are stored locally on your device
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-text">© 2025 glint.ai</div>
+    </div>
+  </footer>
+
+  <script src="theme.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <style>
+    /* Saved Messages Page Full Screen Styling */
+    .saved-messages-fullpage {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--bg);
+      padding: 0;
+      margin: 0;
+    }
+
+    .saved-messages-header {
+      text-align: center;
+      padding: 30px 20px 20px 20px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .saved-messages-header h1 {
+      color: var(--accent);
+      font-size: 2.5em;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
+
+    .saved-messages-content {
+      max-width: 100%;
+      padding: 0 20px 40px 20px;
+      background: var(--bg);
+    }
+
+    .search-bar-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-bar {
+      flex: 1;
+      padding: 14px 16px;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .search-bar:focus {
+      border-color: var(--accent);
+      background: var(--panel);
+      outline: none;
+    }
+
+    .search-bar::placeholder {
+      color: var(--text);
+      opacity: 0.7;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      min-width: 80px;
+    }
+
+    .btn-search {
+      background: var(--accent);
+      color: var(--bot-text);
+    }
+
+    .btn-search:hover {
+      background: var(--accent-secondary);
+      transform: translateY(-1px);
+    }
+
+    .messages-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .message-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      transition: all 0.3s ease;
+    }
+
+    .message-item:hover {
+      background: var(--panel);
+      border-color: var(--accent);
+      box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.1);
+      transform: translateY(-2px);
+    }
+
+    .message-content {
+      flex: 1;
+    }
+
+    .chat-name {
+      color: var(--accent);
+      font-size: 1.2em;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .message-meta {
+      color: var(--text);
+      opacity: 0.7;
+      font-size: 0.9em;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin-left: 15px;
+    }
+
+    .btn-rename {
+      background: var(--accent);
+      color: var(--bot-text);
+    }
+
+    .btn-rename:hover {
+      background: var(--accent-secondary);
+    }
+
+    .btn-delete-chat {
+      background: #ff4444;
+      color: white;
+    }
+
+    .btn-delete-chat:hover {
+      background: #cc0000;
+      transform: translateY(-1px);
+    }
+
+    .no-messages {
+      text-align: center;
+      opacity: 0.7;
+      padding: 60px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      margin: 20px 0;
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .secure-privacy {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 30px;
+      border-radius: 8px;
+      color: var(--accent);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-clear-all {
+      background: #ff9800;
+      color: var(--bot-text);
+      width: 100%;
+      margin-top: 24px;
+      padding: 14px;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-clear-all:hover {
+      background: #f57c00;
+      transform: translateY(-1px);
+    }
+
+    /* Container fix for full screen */
+    .container {
+      height: auto !important;
+      min-height: calc(100vh - 140px) !important;
+      overflow-y: auto !important;
+      padding-bottom: 0 !important;
+    }
+
+    .chat-area {
+      height: auto !important;
+      min-height: 100% !important;
+    }
+
+    /* Dark theme fixes */
+    body.dark .saved-messages-fullpage {
+      background: var(--bg) !important;
+    }
+
+    body.dark .saved-messages-content {
+      background: var(--bg) !important;
+    }
+
+    body.dark .message-item {
+      background: var(--card) !important;
+      border-color: var(--border) !important;
+    }
+
+    body.dark .no-messages {
+      background: var(--panel) !important;
+      border-color: var(--border) !important;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .saved-messages-header h1 {
+        font-size: 2em;
+      }
+      
+      .saved-messages-content {
+        padding: 0 15px 30px 15px;
+      }
+      
+      .search-bar-container {
+        flex-direction: column;
+      }
+      
+      .message-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 16px;
+      }
+      
+      .actions {
+        margin-left: 0;
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .btn {
+        min-width: auto;
+        flex: 1;
+        padding: 10px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .saved-messages-content {
+        padding: 0 12px 20px 12px;
+      }
+      
+      .actions {
+        flex-direction: column;
+      }
+      
+      .btn {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+    }
+  </style>
+
+  <script>
+    // Saved Messages Page Specific Logic
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Saved messages page loaded - running page logic');
+      
+      initializeChatArchive();
+      
+      // Search functionality
+      const searchBar = document.getElementById('searchBar');
+      const searchBtn = document.getElementById('searchBtn');
+      
+      searchBtn.addEventListener('click', () => {
+        loadChatList();
+      });
+      
+      searchBar.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          loadChatList();
+        }
+      });
+    });
+
+    function showNotification(message) {
+      const existingNotification = document.querySelector('.save-notification');
+      if (existingNotification) existingNotification.remove();
+      
+      const notification = document.createElement('div');
+      notification.className = 'save-notification';
+      notification.innerHTML = message;
+      notification.style.cssText = `
+        position: fixed; top: 20px; right: 20px; background: var(--accent);
+        color: var(--bot-text); padding: 12px 20px; border-radius: 8px; font-weight: 600;
+        z-index: 10000; animation: slideIn 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      `;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+      @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+    `;
+    document.head.appendChild(style);
+
+    // Chat Archive Logic
+    function initializeChatArchive() {
+      loadChatList();
+    }
+
+    function loadChatList() {
+      const messagesList = document.getElementById('messagesList');
+      const noMessages = document.getElementById('noMessages');
+      const searchBar = document.getElementById('searchBar');
+
+      let chatList = JSON.parse(localStorage.getItem("glintChatList")) || [];
+      messagesList.innerHTML = '';
+      
+      const searchTerm = searchBar.value.toLowerCase().trim();
+      let visibleCount = 0;
+
+      chatList.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      chatList.forEach(chat => {
+        const matches = !searchTerm || chat.name.toLowerCase().includes(searchTerm);
+        if (matches) visibleCount++;
+
+        const div = document.createElement('div');
+        div.className = 'message-item';
+        div.style.display = matches ? 'flex' : 'none';
+        div.innerHTML = `
+          <div class="message-content">
+            <strong class="chat-name" data-id="${chat.id}">${chat.name}</strong>
+            <div class="message-meta">📅 Created on: ${new Date(chat.date).toLocaleString()}</div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-rename" data-id="${chat.id}">✍️ Rename</button>
+            <a href="index.html?chatId=${chat.id}" class="btn btn-search">💬 Open Chat</a>
+            <button class="btn btn-delete-chat" data-id="${chat.id}">🗑️ Delete</button>
+          </div>
+        `;
+        messagesList.appendChild(div);
+      });
+
+      if (visibleCount === 0) {
+        noMessages.style.display = 'block';
+        noMessages.innerHTML = searchTerm 
+          ? `🔍 No conversations found for "<strong>${searchTerm}</strong>"`
+          : `📝 No saved conversations yet.<br><small>All your new chats will appear here automatically.</small>`;
+      } else {
+        noMessages.style.display = 'none';
+
+        const clearAllBtn = document.createElement('button');
+        clearAllBtn.className = 'btn btn-clear-all';
+        clearAllBtn.innerHTML = '🗑️ Clear All Conversations';
+        messagesList.appendChild(clearAllBtn);
+
+        clearAllBtn.addEventListener('click', () => {
+          if (confirm('Are you sure you want to clear ALL saved conversations? This action cannot be undone.')) {
+            chatList.forEach(chat => localStorage.removeItem('messages_html_' + chat.id));
+            localStorage.removeItem('glintChatList');
+            loadChatList();
+            showNotification('All conversations cleared successfully!');
+          }
+        });
+      }
+
+      // Add event listeners for rename and delete buttons
+      messagesList.addEventListener('click', (e) => {
+        const chatId = e.target.getAttribute('data-id');
+        if (!chatId) return;
+
+        if (e.target.classList.contains('btn-rename')) {
+          const currentName = e.target.closest('.message-item').querySelector('.chat-name').innerText;
+          const newName = prompt('Enter new name:', currentName);
+          if (newName && newName.trim() !== currentName) {
+            let list = JSON.parse(localStorage.getItem('glintChatList')) || [];
+            const idx = list.findIndex(c => c.id === chatId);
+            if (idx > -1) {
+              list[idx].name = newName.trim();
+              localStorage.setItem('glintChatList', JSON.stringify(list));
+              loadChatList();
+              showNotification(`Renamed to "${newName.trim()}"`);
+            }
+          }
+        }
+
+        if (e.target.classList.contains('btn-delete-chat')) {
+          if (confirm('Delete this conversation permanently?')) {
+            let list = JSON.parse(localStorage.getItem('glintChatList')) || [];
+            list = list.filter(c => c.id !== chatId);
+            localStorage.setItem('glintChatList', JSON.stringify(list));
+            localStorage.removeItem('messages_html_' + chatId);
+            loadChatList();
+            showNotification('Conversation deleted!');
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

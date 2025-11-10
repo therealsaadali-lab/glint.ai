@@ -1,0 +1,128 @@
+/* theme.css - Theme Variables and Theme-Specific Styles (Final Fix for Send Button) */
+
+/* ==================== THEME VARIABLES (DEFAULT - WHITE THEME) ==================== */
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --panel: #ffffff; /* Pure white */
+  --card: #e0e0e0;
+  --accent: #007bff; /* FIX: Primary Accent color set to Blue for visibility in Light Theme */
+  --accent2: #0056b3; /* Darker Blue for hover */
+  --user-text: #000000;
+  --bot-bubble: var(--card); /* FIX: Bot bubble is light grey/card in light theme */
+  --bot-text: #ffffff; /* FIX: Bot text is white on dark accents/black on light bubble */
+  --border: rgba(0,0,0,0.1);
+  --overlay-bg: rgba(0,0,0,0.5);
+}
+
+/* DARK THEME - Black */
+html.dark {
+  --bg: #000000;
+  --text: #ffffff;
+  --panel: #333333;
+  --card: #444444;
+  --accent: #60A5FA; /* FIX: Light Blue accent for Dark Theme */
+  --accent2: #3B82F6; /* Slightly darker Blue for hover */
+  --user-text: #ffffff;
+  --bot-bubble: var(--panel); /* FIX: Bot bubble is dark grey/panel in dark theme */
+  --bot-text: #ffffff; 
+  --border: rgba(255,255,255,0.1);
+  --overlay-bg: rgba(0,0,0,0.7);
+}
+
+/* LIGHT THEME - White */
+html.light {
+  --bg: #ffffff;
+  --text: #000000;
+  --panel: #ffffff;
+  --card: #e0e0e0;
+  --accent: #007bff; /* FIX: Primary Accent color set to Blue for visibility */
+  --accent2: #0056b3; 
+  --user-text: #000000;
+  --bot-bubble: var(--card); 
+  --bot-text: #000000; 
+  --border: rgba(0,0,0,0.1);
+  --overlay-bg: rgba(0,0,0,0.5);
+}
+
+/* ==================== THEME DEPENDENT STYLES ==================== */
+html body {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  margin: 0;
+  padding: 0;
+}
+
+html header {
+  background: var(--panel) !important;
+  color: var(--text) !important;
+  box-shadow: 0 2px 4px var(--border) !important;
+}
+
+html .composer {
+  background: var(--panel) !important;
+  border-top: 1px solid var(--border) !important;
+  box-shadow: 0 2px 4px var(--border) !important;
+}
+
+html .footer {
+  background: var(--panel) !important;
+  color: var(--text) !important;
+  border-top: 1px solid var(--border) !important;
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+html .footer p {
+  color: var(--text) !important;
+  opacity: 0.8;
+  margin: 5px 0;
+}
+
+html .footer .version {
+  color: var(--text) !important;
+  opacity: 0.6;
+  font-size: 12px;
+}
+
+html .title, html .subtitle { color: var(--text) !important; }
+html .drawer { background: var(--card) !important; color: var(--text) !important; }
+
+/* Bot message bubble - Dynamic based on theme */
+html .bubble.bot, html .bubble.bot.welcome-message {
+  background: var(--bot-bubble) !important;
+  color: var(--bot-text) !important;
+}
+
+/* User message bubble - make sure it's visible */
+html .bubble.user {
+  background: var(--card) !important; /* Changed to card color for visibility */
+  color: var(--user-text) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* Input field */
+html .composer input {
+  border: 1px solid var(--border);
+  background: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+/* Accent element styling */
+html .message-archive-link { 
+  background: var(--accent) !important; 
+  color: white !important; /* Text should be white on accent color */
+}
+html .drawer a:hover { 
+  background: var(--accent) !important; 
+  color: white !important; /* Text should be white on accent color */
+}
+html .theme-btn-footer { border: 2px solid var(--text); background: var(--card) !important; color: var(--text) !important; }
+html ::-webkit-scrollbar-track { background: var(--panel) !important; }
+html ::-webkit-scrollbar-thumb { background: var(--accent) !important; }
